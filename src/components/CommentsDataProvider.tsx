@@ -3,20 +3,17 @@ import { globalData } from "../context/globalData"
 import { INITIAL_DATA } from "../constants/INITIAL_DATA"
 import { actionType } from "../types/actionType"
 import { commentType } from "../types/commentType"
-
-type CommentsDataProviderProps = {
-    children: ReactNode[]
-}
+import { ACTION_TYPES } from "../constants/ACTION_TYPES"
 
 function reducer(oldState: commentType[], action: actionType) {
     switch (action.type) {
-        case 'ADD_COMMENT':
+        case ACTION_TYPES.ADD:
             return [...oldState, action.payload]
 
-        case 'DELETE_COMMENT':
+        case ACTION_TYPES.DELETE:
             return oldState.filter(comment => comment.id !== action.payload.id)
 
-        case 'EDIT_COMMENT':
+        case ACTION_TYPES.EDIT:
             return oldState.map(oldComment => {
                 if (oldComment.id === action.payload.id) {
                     return {...oldComment, commentText: action.payload.commentText }
@@ -24,7 +21,7 @@ function reducer(oldState: commentType[], action: actionType) {
                     return oldComment
                 }
             })
-        case 'UPVOTE_COMMENT': 
+        case ACTION_TYPES.UPVOTE: 
             return oldState.map(oldComment => {
             if (oldComment.id === action.payload.id) {
                 return {...oldComment, votes: oldComment.votes + 1}
@@ -32,7 +29,7 @@ function reducer(oldState: commentType[], action: actionType) {
                 return oldComment
             }
         })
-        case 'DOWNVOTE_COMMENT': 
+        case ACTION_TYPES.DOWNVOTE: 
             return oldState.map(oldComment => {
             if (oldComment.id === action.payload.id) {
                 return {...oldComment, votes: oldComment.votes - 1}
@@ -45,28 +42,31 @@ function reducer(oldState: commentType[], action: actionType) {
     }
 }
 
+type CommentsDataProviderProps = {
+    children: ReactNode[]
+}
 
 function CommentsDataProvider({children}: CommentsDataProviderProps) {
 
     const [state, dispatch] = useReducer(reducer, INITIAL_DATA)
 
     function addComment(comment: commentType) {
-        dispatch({type: 'ADD_COMMENT', payload: comment })
+        dispatch({type: ACTION_TYPES.ADD, payload: comment })
     }
 
     function deleteComment(comment: commentType) {
-        dispatch({type: 'DELETE_COMMENT', payload: comment})
+        dispatch({type: ACTION_TYPES.DELETE, payload: comment})
     }
 
     function editComment(comment: commentType) {
-        dispatch({type: 'EDIT_COMMENT', payload: comment})
+        dispatch({type: ACTION_TYPES.EDIT, payload: comment})
     }
 
     function upvoteComment(comment: commentType) {
-        dispatch({type: 'UPVOTE_COMMENT', payload: comment})
+        dispatch({type: ACTION_TYPES.UPVOTE, payload: comment})
     }
     function downvoteComment(comment: commentType) {
-        dispatch({type: 'DOWNVOTE_COMMENT', payload: comment})
+        dispatch({type: ACTION_TYPES.DOWNVOTE, payload: comment})
     }
 
     return (
