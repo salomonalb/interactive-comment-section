@@ -1,10 +1,8 @@
 import { nanoid } from "nanoid";
 import { commentType } from "../types/commentType";
-import { USERS_ARRAY } from "../constants/USERS_ARRAY";
-import { createContext } from "react";
+import { USERS_ARRAY } from "./USERS_ARRAY";
 
-
-export const initialData: commentType[] = [
+export const INITIAL_DATA: commentType[] = [
     {
         id: nanoid(),
         commentText: "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
@@ -39,5 +37,3 @@ export const initialData: commentType[] = [
         ]
     }
 ]
-                                        //this defines the shape of the context state and methods
-export const CommentsData = createContext([] as commentType[])

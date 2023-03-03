@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useReducer } from "react"
-import { CommentsData } from "../context/CommentsData"
-import { initialData } from "../context/CommentsData"
+import { globalData } from "../context/globalData"
+import { INITIAL_DATA } from "../constants/INITIAL_DATA"
 import { actionType } from "../types/actionType"
 import { commentType } from "../types/commentType"
 
@@ -20,18 +20,17 @@ function reducer(oldState: commentType[], action: actionType) {
 
 function CommentsDataProvider({children}: CommentsDataProviderProps) {
 
-    const [state, dispatch] = useReducer(reducer, initialData)
+    const [state, dispatch] = useReducer(reducer, INITIAL_DATA)
 
     function addComment(comment: commentType) {
         dispatch({type: 'ADD_COMMENT', payload: comment })
     }
-                                            //it seems like the intial data and the state returned
-                                            //from useReducer are not the same
+
     return (
         <div>                            
-            <CommentsData.Provider value={initialData}>
+            <globalData.Provider value={{data: state, addComment: addComment}}>
                 {children}
-            </CommentsData.Provider>
+            </globalData.Provider>
         </div>
     )
 }

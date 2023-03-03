@@ -1,11 +1,15 @@
 import React, { FormEvent, useState, useContext } from 'react'
 import { nanoid } from 'nanoid'
 import { CurrentUser } from '../context/CurrentUser'
+import { globalData } from '../context/globalData'
 
 function CommentForm() {
 
     const [comment, setComment] = useState('')  
+
     const user = useContext(CurrentUser)
+
+    const {addComment} = useContext(globalData)
 
     function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
         setComment(event.target.value)
@@ -13,7 +17,7 @@ function CommentForm() {
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault()
 
-        /*commentsData.push({
+        addComment({
             id: nanoid(),
             commentText: comment,
             date: Date.now(),
@@ -23,7 +27,9 @@ function CommentForm() {
                 username: user.username,
                 avatar: user.avatar,
             }
-        })*/
+        })
+
+        setComment('')
     }
 
     return (

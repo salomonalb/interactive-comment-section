@@ -1,13 +1,12 @@
 import { useContext } from "react"
-import { CommentsData } from "../context/CommentsData"
+import { globalData } from "../context/globalData"
 import CommentComp from "./CommentComp"
 
 
 function CommentsList() {
-                            //this can read the data that comes from intial data but not from
-                            //state that comes from useReducer
-    const list = useContext(CommentsData)
-    const commentComponents = list.map(commentObj => {
+    
+    const {data} = useContext(globalData)
+    const commentComponents = data.map(commentObj => {
         return <CommentComp key={commentObj.id} commentObj={commentObj} />
     })
 
