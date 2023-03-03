@@ -12,8 +12,13 @@ function reducer(oldState: commentType[], action: actionType) {
     switch (action.type) {
         case 'ADD_COMMENT':
             return [...oldState, action.payload]
+        case 'DELETE_COMMENT':
+            //return oldState.filter(comment => comment.id !== action.payload.id)
+            console.log(action.payload.id)
+            return oldState.filter(comment => comment.id !== action.payload.id)
         default:
             return oldState
+        
     }
 }
 
@@ -26,9 +31,17 @@ function CommentsDataProvider({children}: CommentsDataProviderProps) {
         dispatch({type: 'ADD_COMMENT', payload: comment })
     }
 
+    function deleteComment(comment: commentType) {
+        dispatch({type: 'DELETE_COMMENT', payload: comment})
+    }
+
     return (
         <div>                            
-            <globalData.Provider value={{data: state, addComment: addComment}}>
+            <globalData.Provider value={{
+                data: state, 
+                addComment: addComment,
+                deleteComment: deleteComment
+            }}>
                 {children}
             </globalData.Provider>
         </div>
