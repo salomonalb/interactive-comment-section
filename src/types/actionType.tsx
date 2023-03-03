@@ -1,6 +1,6 @@
-import { commentType } from "./commentType"
+import { commentType } from "./commentType";
 
 export type actionType = {
-    type: string,
-    payload: commentType
-}
+  type: string;
+  payload: commentType;
+};
