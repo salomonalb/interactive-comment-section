@@ -1,4 +1,4 @@
 import { createContext } from "react"
-import { user } from "./usersArray"
+import { user } from "../types/userType"
 
 export const CurrentUser = createContext({} as user)

@@ -1,4 +1,4 @@
-import { user } from "./usersArray"
+import { user } from "./userType"
 
 export type commentType = {
     id: string,

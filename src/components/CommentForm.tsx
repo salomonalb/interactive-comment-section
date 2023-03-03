@@ -1,7 +1,6 @@
 import React, { FormEvent, useState, useContext } from 'react'
 import { nanoid } from 'nanoid'
 import { CurrentUser } from '../context/CurrentUser'
-import { commentsData } from '../context/staticCommentsTest'
 
 function CommentForm() {
 
@@ -14,7 +13,7 @@ function CommentForm() {
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault()
 
-        commentsData.push({
+        /*commentsData.push({
             id: nanoid(),
             commentText: comment,
             date: Date.now(),
@@ -24,9 +23,7 @@ function CommentForm() {
                 username: user.username,
                 avatar: user.avatar,
             }
-        })
-
-        console.log(commentsData)
+        })*/
     }
 
     return (

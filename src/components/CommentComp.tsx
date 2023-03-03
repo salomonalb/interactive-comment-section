@@ -1,4 +1,4 @@
-import { commentType } from "../context/commentType"
+import { commentType } from "../types/commentType"
 
 type commentProps = {
     commentObj: commentType

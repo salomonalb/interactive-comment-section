@@ -1,20 +1,20 @@
-import { usersArray } from "../context/usersArray"
+import { USERS_ARRAY } from "../constants/USERS_ARRAY"
 import { ReactNode, useState } from "react"
 import { CurrentUser } from "../context/CurrentUser"
 
 type CurrentUserProviderProps = {
-    children: ReactNode[]
+    children: ReactNode
 }
 
 function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
-    const [currentUser, setCurrentUser] = useState(usersArray[0])
+    const [currentUser, setCurrentUser] = useState(USERS_ARRAY[0])
 
     function changeUser(event: React.MouseEvent<HTMLButtonElement>): void {
         const index = Number((event.currentTarget as HTMLButtonElement).value)
-        setCurrentUser(usersArray[index])
+        setCurrentUser(USERS_ARRAY[index])
     }
-    const buttonElements = usersArray.map((user, index) => {
+    const buttonElements = USERS_ARRAY.map((user, index) => {
         return  <button key={user.username} value={index} onClick={changeUser}>
                     <img src={user.avatar} alt={`${user.username} avatar`} />
                 </button>
