@@ -1,4 +1,3 @@
-
 import { usersArray } from "../context/usersArray"
 import { ReactNode, useState } from "react"
 import { CurrentUser } from "../context/CurrentUser"
@@ -12,17 +11,19 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     const [currentUser, setCurrentUser] = useState(usersArray[0])
 
     function changeUser(event: React.MouseEvent<HTMLButtonElement>): void {
-        const index = Number((event.target as HTMLButtonElement).value)
+        const index = Number((event.currentTarget as HTMLButtonElement).value)
         setCurrentUser(usersArray[index])
     }
+    const buttonElements = usersArray.map((user, index) => {
+        return  <button key={user.username} value={index} onClick={changeUser}>
+                    <img src={user.avatar} alt={`${user.username} avatar`} />
+                </button>
+    })
 
     return (
     <div>
         Change User:
-        <button value={0} onClick={changeUser}>Amy</button>
-        <button value={1} onClick={changeUser}>Max</button>
-        <button value={2} onClick={changeUser}>Ramses</button>
-        <button value={3} onClick={changeUser}>Julius</button>
+        {buttonElements}
         <CurrentUser.Provider value={currentUser}>
             {children}
         </CurrentUser.Provider>
