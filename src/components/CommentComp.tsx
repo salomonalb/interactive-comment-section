@@ -19,13 +19,19 @@ function CommentComp({commentObj}: commentProps) {
     })
 
     const user = useContext(CurrentUser)
-    const { deleteComment } = useContext(globalData)
+    const { deleteComment, upvoteComment, downvoteComment } = useContext(globalData)
 
     function handleDelete() {
         deleteComment(commentObj)
     }
     function handleEdit() {
         setIsEditing(prevIsEditing => !prevIsEditing)
+    }
+    function handleUpvote() {
+        upvoteComment(commentObj)
+    }
+    function handleDownvote() {
+        downvoteComment(commentObj)
     }
 
     useEffect(() => {
@@ -35,23 +41,46 @@ function CommentComp({commentObj}: commentProps) {
     return (
         <article>
             <hr />
-            {user.username === commentObj.author.username
-            ? <button onClick={handleDelete}>Delete This Comment</button>
-            : null}
 
-            {user.username === commentObj.author.username
-            ? <button onClick={handleEdit}>{isEditing ? "Editing" : "Edit This Comment"}</button>
-            : null}
+            {
+                user.username === commentObj.author.username
+                ? <button onClick={handleDelete}>Delete This Comment</button>
+                : null
+            }
 
-            {user.username !== commentObj.author.username
-            ? <button>Reply to This Comment</button>
-            : null}
+            {
+                user.username === commentObj.author.username
+                ? <button onClick={handleEdit}>{isEditing ? "Editing" : "Edit This Comment"}</button>
+                : null
+            }
+
+            {
+                user.username !== commentObj.author.username
+                ? <button>Reply to This Comment</button>
+                : null
+            }
+
+            {
+                user.username !== commentObj.author.username
+                ? <button onClick={handleUpvote}>Arrivoto</button>
+                : null
+            }
+
+            {
+                user.username !== commentObj.author.username
+                ? <button onClick={handleDownvote}>bajivoto</button>
+                : null
+            }
 
             <p>{commentObj.votes}</p>
             <p>{commentObj.author.username}</p>
             <p><img src={commentObj.author.avatar} /></p>
             
-            {isEditing ? <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} /> : <p>{commentObj.commentText}</p>}
+            {
+                isEditing 
+                ? <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} /> 
+                : <p>{commentObj.commentText}</p>
+            }
             
             
             <p>{commentObj.date}</p>

@@ -14,19 +14,32 @@ function reducer(oldState: commentType[], action: actionType) {
             return [...oldState, action.payload]
 
         case 'DELETE_COMMENT':
-            console.log(action.payload.id)
             return oldState.filter(comment => comment.id !== action.payload.id)
 
         case 'EDIT_COMMENT':
-            console.log(action.payload.id)
             return oldState.map(oldComment => {
-                if(oldComment.id === action.payload.id) {
-                    console.log('here')
+                if (oldComment.id === action.payload.id) {
                     return {...oldComment, commentText: action.payload.commentText }
                 } else {
                     return oldComment
                 }
             })
+        case 'UPVOTE_COMMENT': 
+            return oldState.map(oldComment => {
+            if (oldComment.id === action.payload.id) {
+                return {...oldComment, votes: oldComment.votes + 1}
+            } else {
+                return oldComment
+            }
+        })
+        case 'DOWNVOTE_COMMENT': 
+            return oldState.map(oldComment => {
+            if (oldComment.id === action.payload.id) {
+                return {...oldComment, votes: oldComment.votes - 1}
+            } else {
+                return oldComment
+            }
+        }) 
         default:
             return oldState
     }
@@ -49,13 +62,22 @@ function CommentsDataProvider({children}: CommentsDataProviderProps) {
         dispatch({type: 'EDIT_COMMENT', payload: comment})
     }
 
+    function upvoteComment(comment: commentType) {
+        dispatch({type: 'UPVOTE_COMMENT', payload: comment})
+    }
+    function downvoteComment(comment: commentType) {
+        dispatch({type: 'DOWNVOTE_COMMENT', payload: comment})
+    }
+
     return (
         <div>                            
             <globalData.Provider value={{
                 data: state, 
                 addComment: addComment,
                 deleteComment: deleteComment,
-                editComment: editComment
+                editComment: editComment,
+                upvoteComment: upvoteComment,
+                downvoteComment: downvoteComment
             }}>
                 {children}
             </globalData.Provider>
