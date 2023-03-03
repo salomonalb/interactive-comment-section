@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, useContext } from 'react'
 import { nanoid } from 'nanoid'
-import { CurrentUser } from '../App'
+import { CurrentUser } from '../context/CurrentUser'
 
 function CommentForm() {
 
