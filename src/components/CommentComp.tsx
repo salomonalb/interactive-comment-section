@@ -18,11 +18,15 @@ function CommentComp({ commentObj }: commentProps) {
   });
 
   const user = useContext(CurrentUser);
-  const { deleteComment, upvoteComment, downvoteComment } =
+  const { deleteComment, upvoteComment, downvoteComment, deleteReply } =
     useContext(globalData);
 
   function handleDelete() {
-    deleteComment(commentObj);
+    if (commentObj.parentId) {
+      deleteReply(commentObj);
+    } else {
+      deleteComment(commentObj);
+    }
   }
   function handleEdit() {
     setIsEditing((prevIsEditing) => !prevIsEditing);

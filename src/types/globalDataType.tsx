@@ -8,4 +8,5 @@ export type globalDataType = {
   upvoteComment: (comment: commentType) => void;
   downvoteComment: (comment: commentType) => void;
   replyToComment: (reply: commentType) => void;
+  deleteReply: (comment: commentType) => void;
 };

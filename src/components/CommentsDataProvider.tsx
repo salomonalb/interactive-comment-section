@@ -7,13 +7,13 @@ import { ACTION_TYPES } from "../constants/ACTION_TYPES";
 
 function reducer(oldState: commentType[], action: actionType) {
   switch (action.type) {
-    case ACTION_TYPES.ADD:
+    case ACTION_TYPES.ADD_COMMENT:
       return [...oldState, action.payload];
 
-    case ACTION_TYPES.DELETE:
+    case ACTION_TYPES.DELETE_COMMENT:
       return oldState.filter((comment) => comment.id !== action.payload.id);
 
-    case ACTION_TYPES.EDIT:
+    case ACTION_TYPES.EDIT_COMMENT:
       return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.id) {
           return { ...oldComment, commentText: action.payload.commentText };
@@ -22,7 +22,7 @@ function reducer(oldState: commentType[], action: actionType) {
         }
       });
 
-    case ACTION_TYPES.UPVOTE:
+    case ACTION_TYPES.UPVOTE_COMMENT:
       return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.id) {
           return { ...oldComment, votes: oldComment.votes + 1 };
@@ -31,7 +31,7 @@ function reducer(oldState: commentType[], action: actionType) {
         }
       });
 
-    case ACTION_TYPES.DOWNVOTE:
+    case ACTION_TYPES.DOWNVOTE_COMMENT:
       return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.id) {
           return { ...oldComment, votes: oldComment.votes - 1 };
@@ -40,15 +40,33 @@ function reducer(oldState: commentType[], action: actionType) {
         }
       });
 
-    case ACTION_TYPES.REPLY:
+    case ACTION_TYPES.ADD_REPLY:
       return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.parentId) {
-          return { ...oldComment, replies: [...oldComment.replies, action.payload] }
+          return {
+            ...oldComment,
+            replies: [...oldComment.replies, action.payload],
+          };
         } else {
-          return oldComment
+          return oldComment;
         }
       });
 
+    case ACTION_TYPES.DELETE_REPLY:
+      return oldState.map((oldComment) => {
+        if (oldComment.id === action.payload.parentId) {
+          return {
+            ...oldComment,
+            replies: [
+              ...oldComment.replies.filter(
+                (reply) => reply.id !== action.payload.id
+              ),
+            ],
+          };
+        } else {
+          return oldComment;
+        }
+      });
     default:
       return oldState;
   }
@@ -62,27 +80,30 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   const [state, dispatch] = useReducer(reducer, INITIAL_DATA);
 
   function addComment(comment: commentType) {
-    dispatch({ type: ACTION_TYPES.ADD, payload: comment });
+    dispatch({ type: ACTION_TYPES.ADD_COMMENT, payload: comment });
   }
 
   function deleteComment(comment: commentType) {
-    dispatch({ type: ACTION_TYPES.DELETE, payload: comment });
+    dispatch({ type: ACTION_TYPES.DELETE_COMMENT, payload: comment });
   }
 
   function editComment(comment: commentType) {
-    dispatch({ type: ACTION_TYPES.EDIT, payload: comment });
+    dispatch({ type: ACTION_TYPES.EDIT_COMMENT, payload: comment });
   }
 
   function upvoteComment(comment: commentType) {
-    dispatch({ type: ACTION_TYPES.UPVOTE, payload: comment });
+    dispatch({ type: ACTION_TYPES.UPVOTE_COMMENT, payload: comment });
   }
 
   function downvoteComment(comment: commentType) {
-    dispatch({ type: ACTION_TYPES.DOWNVOTE, payload: comment });
+    dispatch({ type: ACTION_TYPES.DOWNVOTE_COMMENT, payload: comment });
   }
-  
+
   function replyToComment(reply: commentType) {
-    dispatch({ type: ACTION_TYPES.REPLY, payload: reply });
+    dispatch({ type: ACTION_TYPES.ADD_REPLY, payload: reply });
+  }
+  function deleteReply(reply: commentType) {
+    dispatch({ type: ACTION_TYPES.DELETE_REPLY, payload: reply });
   }
 
   return (
@@ -96,6 +117,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           upvoteComment: upvoteComment,
           downvoteComment: downvoteComment,
           replyToComment: replyToComment,
+          deleteReply: deleteReply,
         }}
       >
         {children}
