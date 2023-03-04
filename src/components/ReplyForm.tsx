@@ -8,17 +8,14 @@ type ReplyFormProps = {
     setIsReplying: (value: boolean)=> void
 }
 function ReplyForm({parentId, setIsReplying}: ReplyFormProps) {
-   const [comment, setComment] = useState("");
+  const [comment, setComment] = useState("");
 
   const user = useContext(CurrentUser);
-  
-  /*
   const { replyToComment } = useContext(globalData);
-    */
+  
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
   }
-  /*
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
@@ -36,11 +33,11 @@ function ReplyForm({parentId, setIsReplying}: ReplyFormProps) {
     });
 
     setComment("");
+    setIsReplying(false)
   }
- */
+
   return (
-    <form /* onSubmit={handleSubmit} */>
-        
+    <form onSubmit={handleSubmit}>
       <img  src={user.avatar} />
       <textarea value={comment} onChange={handleChange}/>
       <button>Send</button>

@@ -37,15 +37,10 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
-    /* case ACTION_TYPES.REPLY:
+    case ACTION_TYPES.REPLY:
       return oldState.map(oldComment => {
-        if (oldComment.id === action.payload.parentId) {
-          return {
-            ...oldComment,
-            replies: [...oldComment.replies, action.payload]
-          }
-        }
-      }) */
+        return oldComment.id === action.payload.parentId ? {...oldComment, replies: [...oldComment.replies, action.payload]} : oldComment 
+      })
     default:
       return oldState;
   }
