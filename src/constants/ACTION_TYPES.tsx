@@ -4,4 +4,5 @@ export enum ACTION_TYPES {
   EDIT = "EDIT",
   UPVOTE = "UPVOTE",
   DOWNVOTE = "DOWNVOTE",
+  REPLY = "REPLY"
 }
