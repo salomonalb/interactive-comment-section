@@ -82,6 +82,21 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment
         }
       })
+
+      case ACTION_TYPES.DOWNVOTE_REPLY:
+      return oldState.map(oldComment => {
+        if (oldComment.id === action.payload.parentId) {
+          return {...oldComment, replies: oldComment.replies.map(oldReply => {
+            if (oldReply.id === action.payload.id) {
+              return {...oldReply, votes: oldReply.votes - 1}
+            } else {
+              return oldReply
+            }
+          })}
+        } else {
+          return oldComment
+        }
+      })
     default:
       return oldState;
   }
@@ -126,6 +141,10 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
     dispatch({type: ACTION_TYPES.UPVOTE_REPLY, payload: reply})
   }
 
+  function downvoteReply(reply: commentType) {
+    dispatch({type: ACTION_TYPES.DOWNVOTE_REPLY, payload: reply})
+  }
+
   return (
     <div>
       <globalData.Provider
@@ -138,7 +157,8 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           downvoteComment: downvoteComment,
           replyToComment: replyToComment,
           deleteReply: deleteReply,
-          upvoteReply: upvoteReply
+          upvoteReply: upvoteReply,
+          downvoteReply: downvoteReply,
         }}
       >
         {children}

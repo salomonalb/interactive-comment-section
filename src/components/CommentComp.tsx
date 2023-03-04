@@ -18,7 +18,7 @@ function CommentComp({ commentObj }: commentProps) {
   });
 
   const user = useContext(CurrentUser);
-  const { deleteComment, upvoteComment, downvoteComment, deleteReply, upvoteReply } =
+  const { deleteComment, upvoteComment, downvoteComment, deleteReply, upvoteReply, downvoteReply } =
     useContext(globalData);
 
   function handleDelete() {
@@ -28,7 +28,7 @@ function CommentComp({ commentObj }: commentProps) {
       deleteComment(commentObj);
     }
   }
-  
+
   function handleEdit() {
     setIsEditing((prevIsEditing) => !prevIsEditing);
   }
@@ -42,7 +42,11 @@ function CommentComp({ commentObj }: commentProps) {
   }
 
   function handleDownvote() {
-    downvoteComment(commentObj);
+    if (commentObj.parentId) {
+      downvoteReply(commentObj);
+    } else {
+      downvoteComment(commentObj);
+    }
   }
   function handleReply() {
     setIsReplying((prevIsReplying) => !prevIsReplying);
