@@ -27,6 +27,16 @@ function CommentComp({ commentObj }: commentProps) {
     downvoteReply,
   } = useContext(globalData);
 
+  const replyProps = commentObj.parentId ? {
+    parentId: commentObj.parentId, 
+    parentAuthor: commentObj.author.username, 
+    setIsReplying
+  } : {
+    parentId: commentObj.id,
+    parentAuthor: commentObj.author.username, 
+    setIsReplying
+  }
+
   function handleDelete() {
     if (commentObj.parentId) {
       deleteReply(commentObj);
@@ -108,12 +118,9 @@ function CommentComp({ commentObj }: commentProps) {
       <p>{commentObj.date}</p>
       <p>{commentObj.id}</p>
 
+      
       {isReplying ? (
-        <ReplyForm
-          parentId={commentObj.id}
-          parentAuthor={commentObj.author.username}
-          setIsReplying={setIsReplying}
-        />
+        <ReplyForm {...replyProps} />
       ) : null}
 
       <div style={{ paddingLeft: "100px" }}>{replies}</div>

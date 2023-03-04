@@ -24,7 +24,7 @@ function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
     addReply({
       parentId: parentId,
       id: nanoid(),
-      commentText: comment,
+      commentText: `@${parentAuthor} ${comment}`,
       date: Date.now(),
       votes: 1,
       replies: [],
