@@ -13,7 +13,7 @@ function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
   const [comment, setComment] = useState("");
 
   const user = useContext(CurrentUser);
-  const { replyToComment } = useContext(globalData);
+  const { addReply } = useContext(globalData);
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
@@ -21,7 +21,7 @@ function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    replyToComment({
+    addReply({
       parentId: parentId,
       id: nanoid(),
       commentText: comment,
