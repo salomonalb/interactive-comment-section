@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useReducer } from "react";
+import { ReactNode, useReducer } from "react";
 import { globalData } from "../context/globalData";
 import { INITIAL_DATA } from "../constants/INITIAL_DATA";
 import { actionType } from "../types/actionType";
@@ -122,7 +122,7 @@ function reducer(oldState: commentType[], action: actionType) {
         }
       });
 
-      case ACTION_TYPES.SORT_STATE:
+      case ACTION_TYPES.SORT_COMMENTS:
         return sortComments(oldState)
     default:
       return oldState;
@@ -181,8 +181,8 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   function editReply(reply: commentType) {
     dispatch({ type: ACTION_TYPES.EDIT_REPLY, payload: reply });
   }
-  function sortState() {
-    dispatch({type: ACTION_TYPES.SORT_STATE, payload: {} as commentType})
+  function sortStateComments() {
+    dispatch({type: ACTION_TYPES.SORT_COMMENTS, payload: {} as commentType})
   }
 
   return (
@@ -200,7 +200,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           upvoteReply,
           downvoteReply,
           editReply,
-          sortState
+          sortStateComments
         }}
       >
         {children}

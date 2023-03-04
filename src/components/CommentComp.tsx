@@ -25,7 +25,7 @@ function CommentComp({ commentObj }: commentProps) {
     deleteReply,
     upvoteReply,
     downvoteReply,
-    sortState
+    sortStateComments
   } = useContext(globalData);
 
   const replyProps = commentObj.parentId ? {
@@ -56,7 +56,7 @@ function CommentComp({ commentObj }: commentProps) {
     } else {
       upvoteComment(commentObj);
     }
-    sortState()
+    sortStateComments()
   }
 
   function handleDownvote() {
@@ -65,7 +65,7 @@ function CommentComp({ commentObj }: commentProps) {
     } else {
       downvoteComment(commentObj);
     }
-    sortState()
+    sortStateComments()
   }
   function handleReply() {
     setIsReplying((prevIsReplying) => !prevIsReplying);
