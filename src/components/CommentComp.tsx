@@ -18,8 +18,14 @@ function CommentComp({ commentObj }: commentProps) {
   });
 
   const user = useContext(CurrentUser);
-  const { deleteComment, upvoteComment, downvoteComment, deleteReply, upvoteReply, downvoteReply } =
-    useContext(globalData);
+  const {
+    deleteComment,
+    upvoteComment,
+    downvoteComment,
+    deleteReply,
+    upvoteReply,
+    downvoteReply,
+  } = useContext(globalData);
 
   function handleDelete() {
     if (commentObj.parentId) {
@@ -35,7 +41,7 @@ function CommentComp({ commentObj }: commentProps) {
 
   function handleUpvote() {
     if (commentObj.parentId) {
-      upvoteReply(commentObj)
+      upvoteReply(commentObj);
     } else {
       upvoteComment(commentObj);
     }
@@ -63,9 +69,7 @@ function CommentComp({ commentObj }: commentProps) {
   return (
     <article>
       <hr />
-      {user.username === commentObj.author.username ? (
-        "YOU"
-      ) : null}
+      {user.username === commentObj.author.username ? "YOU" : null}
 
       {user.username === commentObj.author.username ? (
         <button onClick={handleDelete}>Delete This Comment</button>
@@ -105,7 +109,11 @@ function CommentComp({ commentObj }: commentProps) {
       <p>{commentObj.id}</p>
 
       {isReplying ? (
-        <ReplyForm parentId={commentObj.id} parentAuthor={commentObj.author.username} setIsReplying={setIsReplying} />
+        <ReplyForm
+          parentId={commentObj.id}
+          parentAuthor={commentObj.author.username}
+          setIsReplying={setIsReplying}
+        />
       ) : null}
 
       <div style={{ paddingLeft: "100px" }}>{replies}</div>

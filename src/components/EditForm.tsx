@@ -18,14 +18,14 @@ function EditForm({ commentToEdit, setIsEditing }: EditFormProps) {
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
   }
-  
+
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
     if (commentToEdit.parentId) {
-      editReply({ ...commentToEdit, commentText: comment })
+      editReply({ ...commentToEdit, commentText: comment });
     } else {
-      editComment({ ...commentToEdit, commentText: comment })
+      editComment({ ...commentToEdit, commentText: comment });
     }
     setIsEditing(false);
   }

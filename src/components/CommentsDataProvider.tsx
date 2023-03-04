@@ -67,51 +67,60 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
-    
+
     case ACTION_TYPES.UPVOTE_REPLY:
-      return oldState.map(oldComment => {
+      return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.parentId) {
-          return {...oldComment, replies: oldComment.replies.map(oldReply => {
-            if (oldReply.id === action.payload.id) {
-              return {...oldReply, votes: oldReply.votes + 1}
-            } else {
-              return oldReply
-            }
-          })}
-        } else {
-          return oldComment
-        }
-      })
-
-      case ACTION_TYPES.DOWNVOTE_REPLY:
-      return oldState.map(oldComment => {
-        if (oldComment.id === action.payload.parentId) {
-          return {...oldComment, replies: oldComment.replies.map(oldReply => {
-            if (oldReply.id === action.payload.id) {
-              return {...oldReply, votes: oldReply.votes - 1}
-            } else {
-              return oldReply
-            }
-          })}
-        } else {
-          return oldComment
-        }
-      })
-
-      case ACTION_TYPES.EDIT_REPLY:
-        return oldState.map(oldComment => {
-          if (oldComment.id === action.payload.parentId) {
-            return {...oldComment, replies: oldComment.replies.map(oldReply => {
+          return {
+            ...oldComment,
+            replies: oldComment.replies.map((oldReply) => {
               if (oldReply.id === action.payload.id) {
-                return {...oldReply, commentText: action.payload.commentText}
+                return { ...oldReply, votes: oldReply.votes + 1 };
               } else {
-                return oldReply
+                return oldReply;
               }
-            })}
-          } else {
-            return oldComment
-          }
-        })
+            }),
+          };
+        } else {
+          return oldComment;
+        }
+      });
+
+    case ACTION_TYPES.DOWNVOTE_REPLY:
+      return oldState.map((oldComment) => {
+        if (oldComment.id === action.payload.parentId) {
+          return {
+            ...oldComment,
+            replies: oldComment.replies.map((oldReply) => {
+              if (oldReply.id === action.payload.id) {
+                return { ...oldReply, votes: oldReply.votes - 1 };
+              } else {
+                return oldReply;
+              }
+            }),
+          };
+        } else {
+          return oldComment;
+        }
+      });
+
+    case ACTION_TYPES.EDIT_REPLY:
+      return oldState.map((oldComment) => {
+        if (oldComment.id === action.payload.parentId) {
+          return {
+            ...oldComment,
+            replies: oldComment.replies.map((oldReply) => {
+              if (oldReply.id === action.payload.id) {
+                return { ...oldReply, commentText: action.payload.commentText };
+              } else {
+                return oldReply;
+              }
+            }),
+          };
+        } else {
+          return oldComment;
+        }
+      });
     default:
       return oldState;
   }
@@ -153,15 +162,15 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   }
 
   function upvoteReply(reply: commentType) {
-    dispatch({type: ACTION_TYPES.UPVOTE_REPLY, payload: reply})
+    dispatch({ type: ACTION_TYPES.UPVOTE_REPLY, payload: reply });
   }
 
   function downvoteReply(reply: commentType) {
-    dispatch({type: ACTION_TYPES.DOWNVOTE_REPLY, payload: reply})
+    dispatch({ type: ACTION_TYPES.DOWNVOTE_REPLY, payload: reply });
   }
 
   function editReply(reply: commentType) {
-    dispatch({type: ACTION_TYPES.EDIT_REPLY, payload: reply})
+    dispatch({ type: ACTION_TYPES.EDIT_REPLY, payload: reply });
   }
 
   return (
@@ -178,7 +187,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           deleteReply,
           upvoteReply,
           downvoteReply,
-          editReply
+          editReply,
         }}
       >
         {children}
