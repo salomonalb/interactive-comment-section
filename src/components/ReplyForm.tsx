@@ -5,9 +5,11 @@ import { globalData } from "../context/globalData";
 
 type ReplyFormProps = {
   parentId: string;
+  parentAuthor: string;
   setIsReplying: (value: boolean) => void;
 };
-function ReplyForm({ parentId, setIsReplying }: ReplyFormProps) {
+
+function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
   const [comment, setComment] = useState("");
 
   const user = useContext(CurrentUser);
@@ -41,7 +43,7 @@ function ReplyForm({ parentId, setIsReplying }: ReplyFormProps) {
       <img src={user.avatar} />
       <textarea value={comment} onChange={handleChange} />
       <button>Send</button>
-      Replying to {parentId}
+      Replying to @{parentAuthor}
     </form>
   );
 }

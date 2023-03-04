@@ -67,6 +67,21 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
+    
+    case ACTION_TYPES.UPVOTE_REPLY:
+      return oldState.map(oldComment => {
+        if (oldComment.id === action.payload.parentId) {
+          return {...oldComment, replies: oldComment.replies.map(oldReply => {
+            if (oldReply.id === action.payload.id) {
+              return {...oldReply, votes: oldReply.votes + 1}
+            } else {
+              return oldReply
+            }
+          })}
+        } else {
+          return oldComment
+        }
+      })
     default:
       return oldState;
   }
@@ -102,8 +117,13 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   function replyToComment(reply: commentType) {
     dispatch({ type: ACTION_TYPES.ADD_REPLY, payload: reply });
   }
+
   function deleteReply(reply: commentType) {
     dispatch({ type: ACTION_TYPES.DELETE_REPLY, payload: reply });
+  }
+
+  function upvoteReply(reply: commentType) {
+    dispatch({type: ACTION_TYPES.UPVOTE_REPLY, payload: reply})
   }
 
   return (
@@ -118,6 +138,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           downvoteComment: downvoteComment,
           replyToComment: replyToComment,
           deleteReply: deleteReply,
+          upvoteReply: upvoteReply
         }}
       >
         {children}
