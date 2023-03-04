@@ -12,4 +12,5 @@ export type globalDataType = {
   upvoteReply: (comment: commentType) => void;
   downvoteReply: (comment: commentType) => void;
   editReply: (comment: commentType) => void;
+  sortState: () => void;
 };

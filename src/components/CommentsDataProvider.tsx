@@ -121,9 +121,18 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
+
+      case ACTION_TYPES.SORT_STATE:
+        return sortComments(oldState)
     default:
       return oldState;
   }
+}
+function sortComments(commentsArray: commentType[]) {
+  
+  const newCommentsArray = [...commentsArray]
+  newCommentsArray.sort((a, b) => b.votes - a.votes);
+  return newCommentsArray
 }
 
 type CommentsDataProviderProps = {
@@ -172,6 +181,9 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   function editReply(reply: commentType) {
     dispatch({ type: ACTION_TYPES.EDIT_REPLY, payload: reply });
   }
+  function sortState() {
+    dispatch({type: ACTION_TYPES.SORT_STATE, payload: {} as commentType})
+  }
 
   return (
     <div>
@@ -188,6 +200,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           upvoteReply,
           downvoteReply,
           editReply,
+          sortState
         }}
       >
         {children}
