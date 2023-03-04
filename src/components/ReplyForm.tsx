@@ -4,15 +4,15 @@ import { CurrentUser } from "../context/CurrentUser";
 import { globalData } from "../context/globalData";
 
 type ReplyFormProps = {
-    parentId: string,
-    setIsReplying: (value: boolean)=> void
-}
-function ReplyForm({parentId, setIsReplying}: ReplyFormProps) {
+  parentId: string;
+  setIsReplying: (value: boolean) => void;
+};
+function ReplyForm({ parentId, setIsReplying }: ReplyFormProps) {
   const [comment, setComment] = useState("");
 
   const user = useContext(CurrentUser);
   const { replyToComment } = useContext(globalData);
-  
+
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
   }
@@ -33,13 +33,13 @@ function ReplyForm({parentId, setIsReplying}: ReplyFormProps) {
     });
 
     setComment("");
-    setIsReplying(false)
+    setIsReplying(false);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <img  src={user.avatar} />
-      <textarea value={comment} onChange={handleChange}/>
+      <img src={user.avatar} />
+      <textarea value={comment} onChange={handleChange} />
       <button>Send</button>
       Replying to {parentId}
     </form>

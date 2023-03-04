@@ -3,7 +3,7 @@ import { commentType } from "../types/commentType";
 import { USERS_ARRAY } from "./USERS_ARRAY";
 
 export const INITIAL_DATA: commentType[] = [
-  {  
+  {
     parentId: null,
     id: nanoid(),
     commentText:
@@ -13,7 +13,7 @@ export const INITIAL_DATA: commentType[] = [
     date: Date.parse("03 Feb 2023 03:20:10 GMT"),
     replies: [],
   },
-  {  
+  {
     parentId: null,
     id: nanoid(),
     commentText:
@@ -21,7 +21,8 @@ export const INITIAL_DATA: commentType[] = [
     votes: 5,
     author: USERS_ARRAY[1],
     date: Date.parse("07 Nov 2022 03:20:10 GMT"),
-    replies: [/* 
+    replies: [
+      /* 
       {
         id: nanoid(),
         commentText:
@@ -40,6 +41,7 @@ export const INITIAL_DATA: commentType[] = [
         date: Date.parse("01 Mar 2023 03:20:10 GMT"),
         replies: [],
       },
-     */],
+     */
+    ],
   },
 ];

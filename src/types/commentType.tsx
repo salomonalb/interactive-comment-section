@@ -1,7 +1,7 @@
 import { user } from "./userType";
 
 export type commentType = {
-  parentId: string | null,
+  parentId: string | null;
   id: string;
   commentText: string;
   date: number;

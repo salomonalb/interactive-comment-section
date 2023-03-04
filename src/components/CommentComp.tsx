@@ -11,7 +11,7 @@ type commentProps = {
 
 function CommentComp({ commentObj }: commentProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [isReplying, setIsReplying] = useState(false)
+  const [isReplying, setIsReplying] = useState(false);
 
   const replies = commentObj.replies.map((reply) => {
     return <CommentComp key={reply.id} commentObj={reply} />;
@@ -88,7 +88,7 @@ function CommentComp({ commentObj }: commentProps) {
 
       {isReplying ? (
         <ReplyForm parentId={commentObj.id} setIsReplying={setIsReplying} />
-      ) : null }
+      ) : null}
 
       <div style={{ paddingLeft: "100px" }}>{replies}</div>
     </article>

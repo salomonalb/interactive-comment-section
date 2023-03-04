@@ -21,6 +21,7 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
+
     case ACTION_TYPES.UPVOTE:
       return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.id) {
@@ -29,6 +30,7 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
+
     case ACTION_TYPES.DOWNVOTE:
       return oldState.map((oldComment) => {
         if (oldComment.id === action.payload.id) {
@@ -37,10 +39,16 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
+
     case ACTION_TYPES.REPLY:
-      return oldState.map(oldComment => {
-        return oldComment.id === action.payload.parentId ? {...oldComment, replies: [...oldComment.replies, action.payload]} : oldComment 
-      })
+      return oldState.map((oldComment) => {
+        if (oldComment.id === action.payload.parentId) {
+          return { ...oldComment, replies: [...oldComment.replies, action.payload] }
+        } else {
+          return oldComment
+        }
+      });
+
     default:
       return oldState;
   }
@@ -68,11 +76,13 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   function upvoteComment(comment: commentType) {
     dispatch({ type: ACTION_TYPES.UPVOTE, payload: comment });
   }
+
   function downvoteComment(comment: commentType) {
     dispatch({ type: ACTION_TYPES.DOWNVOTE, payload: comment });
   }
+  
   function replyToComment(reply: commentType) {
-    dispatch({type: ACTION_TYPES.REPLY, payload: reply })
+    dispatch({ type: ACTION_TYPES.REPLY, payload: reply });
   }
 
   return (
@@ -85,7 +95,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           editComment: editComment,
           upvoteComment: upvoteComment,
           downvoteComment: downvoteComment,
-          replyToComment: replyToComment
+          replyToComment: replyToComment,
         }}
       >
         {children}
