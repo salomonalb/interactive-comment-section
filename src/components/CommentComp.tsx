@@ -3,6 +3,7 @@ import { CurrentUser } from "../context/CurrentUser";
 import { commentType } from "../types/commentType";
 import { globalData } from "../context/globalData";
 import EditForm from "./EditForm";
+import ReplyForm from "./ReplyForm";
 
 type commentProps = {
   commentObj: commentType;
@@ -10,6 +11,7 @@ type commentProps = {
 
 function CommentComp({ commentObj }: commentProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isReplying, setIsReplying] = useState(false)
 
   const replies = commentObj.replies.map((reply) => {
     return <CommentComp key={reply.id} commentObj={reply} />;
@@ -31,9 +33,16 @@ function CommentComp({ commentObj }: commentProps) {
   function handleDownvote() {
     downvoteComment(commentObj);
   }
+  function handleReply() {
+    setIsReplying((prevIsReplying) => !prevIsReplying);
+  }
 
   useEffect(() => {
     setIsEditing(false);
+  }, [user]);
+
+  useEffect(() => {
+    setIsReplying(false);
   }, [user]);
 
   return (
@@ -51,7 +60,7 @@ function CommentComp({ commentObj }: commentProps) {
       ) : null}
 
       {user.username !== commentObj.author.username ? (
-        <button>Reply to This Comment</button>
+        <button onClick={handleReply}>Reply to This Comment</button>
       ) : null}
 
       {user.username !== commentObj.author.username ? (
@@ -76,6 +85,11 @@ function CommentComp({ commentObj }: commentProps) {
 
       <p>{commentObj.date}</p>
       <p>{commentObj.id}</p>
+
+      {isReplying ? (
+        <ReplyForm parentId={commentObj.id} setIsReplying={setIsReplying} />
+      ) : null }
+
       <div style={{ paddingLeft: "100px" }}>{replies}</div>
     </article>
   );

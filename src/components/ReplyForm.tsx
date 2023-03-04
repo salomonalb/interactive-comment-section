@@ -3,21 +3,27 @@ import { nanoid } from "nanoid";
 import { CurrentUser } from "../context/CurrentUser";
 import { globalData } from "../context/globalData";
 
-function CommentForm() {
-  const [comment, setComment] = useState("");
+type ReplyFormProps = {
+    parentId: string,
+    setIsReplying: (value: boolean)=> void
+}
+function ReplyForm({parentId, setIsReplying}: ReplyFormProps) {
+   const [comment, setComment] = useState("");
 
   const user = useContext(CurrentUser);
-
-  const { addComment } = useContext(globalData);
-
+  
+  /*
+  const { replyToComment } = useContext(globalData);
+    */
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
   }
+  /*
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    addComment({
-      parentId: null,
+    replyToComment({
+      parentId: parentId,
       id: nanoid(),
       commentText: comment,
       date: Date.now(),
@@ -31,14 +37,16 @@ function CommentForm() {
 
     setComment("");
   }
-
+ */
   return (
-    <form onSubmit={handleSubmit}>
-      <img src={user.avatar} />
-      <textarea value={comment} onChange={handleChange} />
+    <form /* onSubmit={handleSubmit} */>
+        
+      <img  src={user.avatar} />
+      <textarea value={comment} onChange={handleChange}/>
       <button>Send</button>
+      Replying to {parentId}
     </form>
   );
 }
 
-export default CommentForm;
+export default ReplyForm;

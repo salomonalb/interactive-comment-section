@@ -37,6 +37,15 @@ function reducer(oldState: commentType[], action: actionType) {
           return oldComment;
         }
       });
+    /* case ACTION_TYPES.REPLY:
+      return oldState.map(oldComment => {
+        if (oldComment.id === action.payload.parentId) {
+          return {
+            ...oldComment,
+            replies: [...oldComment.replies, action.payload]
+          }
+        }
+      }) */
     default:
       return oldState;
   }
@@ -67,6 +76,9 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   function downvoteComment(comment: commentType) {
     dispatch({ type: ACTION_TYPES.DOWNVOTE, payload: comment });
   }
+  function replyToComment(reply: commentType) {
+    dispatch({type: ACTION_TYPES.REPLY, payload: reply })
+  }
 
   return (
     <div>
@@ -78,6 +90,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           editComment: editComment,
           upvoteComment: upvoteComment,
           downvoteComment: downvoteComment,
+          replyToComment: replyToComment
         }}
       >
         {children}
