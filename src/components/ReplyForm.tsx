@@ -40,8 +40,8 @@ function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <img src={user.avatar} />
-      <textarea value={comment} onChange={handleChange} />
+      <img src={user.avatar} alt={user.username} />
+      <textarea title="reply" value={comment} onChange={handleChange} />
       <button>Send</button>
       Replying to @{parentAuthor}
     </form>

@@ -34,8 +34,8 @@ function CommentForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <img src={user.avatar} />
-      <textarea value={comment} onChange={handleChange} />
+      <img src={user.avatar} alt={user.username} />
+      <textarea value={comment} onChange={handleChange} title="Comment" />
       <button>Send</button>
     </form>
   );

@@ -39,8 +39,7 @@ function EditForm({ commentToEdit, setIsEditing }: EditFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      Edit
-      <textarea
+      <textarea title="edit comment"
         value={comment.replace(/^@[\w\d]+\s/g, "")}
         onChange={handleChange}
       />

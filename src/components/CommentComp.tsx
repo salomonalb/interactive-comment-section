@@ -5,6 +5,8 @@ import { globalData } from "../context/globalData";
 import EditForm from "./EditForm";
 import ReplyForm from "./ReplyForm";
 import DeleteModal from "./DeleteModal";
+import plusIcon from "../assets/images/icon-plus.svg"
+import minusIcon from "../assets/images/icon-minus.svg"
 
 type commentProps = {
   commentObj: commentType;
@@ -87,58 +89,70 @@ function CommentComp({ commentObj }: commentProps) {
   }, [user]);
 
   return (
-    <article>
-      <hr />
+    <article className="comment">
+
       {isDeleting ? (
         <DeleteModal
           setIsDeleting={setIsDeleting}
           handleDeleteModal={handleDeleteModal}
         />
       ) : null}
-      {user.username === commentObj.author.username ? "YOU" : null}
 
-      {user.username === commentObj.author.username ? (
+      <div className="comment__votes-container">
+
+        {user.username !== commentObj.author.username ? (
+          <button className="comment__upvote" onClick={handleUpvote}>
+            <img src={plusIcon} alt="upvote" />
+          </button>
+        ) : <button className="comment__upvote">
+              <img src={plusIcon} alt="upvote" />
+            </button>}
+
+        <p className="comment__votes">{commentObj.votes}</p>
+
+        {user.username !== commentObj.author.username ? (
+          <button className="comment__downvote" onClick={handleDownvote}>
+            <img src={minusIcon} alt="downvote" />
+          </button>
+        ) : <button className="comment__downvote">
+            <img src={minusIcon} alt="downvote" />
+          </button>}
+
+      </div>
+
+      <div>
+        <p>
+          <img src={commentObj.author.avatar} alt={commentObj.author.username}  />
+        </p>
+        <address>
+          <p>{commentObj.author.username}</p>
+          {user.username === commentObj.author.username ? <span>You</span> : null}
+        </address>
+        <p>{commentObj.date}</p>
+        {user.username === commentObj.author.username ? (
         <button onClick={handleDelete}>Delete This Comment</button>
       ) : null}
-
+        {user.username !== commentObj.author.username ? (
+        <button onClick={handleReply}>Reply to This Comment</button>
+      ) : null}
       {user.username === commentObj.author.username ? (
         <button onClick={handleEdit}>
           {isEditing ? "Editing" : "Edit This Comment"}
         </button>
       ) : null}
-
-      {user.username !== commentObj.author.username ? (
-        <button onClick={handleReply}>Reply to This Comment</button>
-      ) : null}
-
-      {user.username !== commentObj.author.username ? (
-        <button onClick={handleUpvote}>Arrivoto</button>
-      ) : null}
-      <p>{commentObj.votes}</p>
-      {user.username !== commentObj.author.username ? (
-        <button onClick={handleDownvote}>bajivoto</button>
-      ) : null}
-
-      <address>
-        <p>{commentObj.author.username}</p>
-      </address>
-
-      <p>
-        <img src={commentObj.author.avatar} />
-      </p>
-
+      </div>
+      
+      <div>
       {isEditing ? (
         <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
       ) : (
         <p>{commentObj.commentText}</p>
       )}
-
-      <p>{commentObj.date}</p>
-      <p>{commentObj.id}</p>
+      </div>
 
       {isReplying ? <ReplyForm {...replyProps} /> : null}
 
-      <section style={{ paddingLeft: "100px" }}>{replies}</section>
+      <section  style={{ paddingLeft: "100px" }}>{replies}</section>
     </article>
   );
 }

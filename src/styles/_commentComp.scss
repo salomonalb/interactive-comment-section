@@ -1,0 +1,29 @@
+@use "./variables" as *;
+
+.comment {
+    background-color: $White;
+    padding: 1.6rem;
+    margin-bottom: 1.6rem;
+    border-radius: 1rem;
+
+    &__votes-container {
+        display: flex;
+        background-color: $Very-ligh-gray;
+        width: max-content;
+        padding: 1.6rem;
+        border-radius: 1rem;
+        gap: 1.6rem;
+        align-items: center;
+    }
+    &__upvote, &__downvote {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+    }
+    &__votes {
+        font-weight: $Font-heavy;
+        color: $Moderate-blue;
+        font-size: 1.5rem;
+    }
+}
