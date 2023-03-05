@@ -27,20 +27,22 @@ function CommentComp({ commentObj }: commentProps) {
     deleteReply,
     upvoteReply,
     downvoteReply,
-    sortStateComments
+    sortStateComments,
   } = useContext(globalData);
 
-  const replyProps = commentObj.parentId ? {
-    parentId: commentObj.parentId, 
-    parentAuthor: commentObj.author.username, 
-    setIsReplying
-  } : {
-    parentId: commentObj.id,
-    parentAuthor: commentObj.author.username, 
-    setIsReplying
-  }
+  const replyProps = commentObj.parentId
+    ? {
+        parentId: commentObj.parentId,
+        parentAuthor: commentObj.author.username,
+        setIsReplying,
+      }
+    : {
+        parentId: commentObj.id,
+        parentAuthor: commentObj.author.username,
+        setIsReplying,
+      };
   function handleDelete() {
-    setIsDeleting(true)
+    setIsDeleting(true);
   }
 
   function handleDeleteModal() {
@@ -61,7 +63,7 @@ function CommentComp({ commentObj }: commentProps) {
     } else {
       upvoteComment(commentObj);
     }
-    sortStateComments()
+    sortStateComments();
   }
 
   function handleDownvote() {
@@ -70,7 +72,7 @@ function CommentComp({ commentObj }: commentProps) {
     } else {
       downvoteComment(commentObj);
     }
-    sortStateComments()
+    sortStateComments();
   }
   function handleReply() {
     setIsReplying((prevIsReplying) => !prevIsReplying);
@@ -87,7 +89,12 @@ function CommentComp({ commentObj }: commentProps) {
   return (
     <article>
       <hr />
-      {isDeleting ? <DeleteModal setIsDeleting={setIsDeleting} handleDeleteModal={handleDeleteModal} /> : null}
+      {isDeleting ? (
+        <DeleteModal
+          setIsDeleting={setIsDeleting}
+          handleDeleteModal={handleDeleteModal}
+        />
+      ) : null}
       {user.username === commentObj.author.username ? "YOU" : null}
 
       {user.username === commentObj.author.username ? (
@@ -115,7 +122,7 @@ function CommentComp({ commentObj }: commentProps) {
       <address>
         <p>{commentObj.author.username}</p>
       </address>
-      
+
       <p>
         <img src={commentObj.author.avatar} />
       </p>
@@ -129,10 +136,7 @@ function CommentComp({ commentObj }: commentProps) {
       <p>{commentObj.date}</p>
       <p>{commentObj.id}</p>
 
-      
-      {isReplying ? (
-        <ReplyForm {...replyProps} />
-      ) : null}
+      {isReplying ? <ReplyForm {...replyProps} /> : null}
 
       <section style={{ paddingLeft: "100px" }}>{replies}</section>
     </article>

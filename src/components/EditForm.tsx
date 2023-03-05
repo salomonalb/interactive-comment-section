@@ -15,7 +15,9 @@ function EditForm({ commentToEdit, setIsEditing }: EditFormProps) {
     setComment(commentToEdit.commentText);
   }, []);
 
-  const parentAuthor = commentToEdit.parentId ? commentToEdit.commentText.match(/^@[\w\d]+/g) : null
+  const parentAuthor = commentToEdit.parentId
+    ? commentToEdit.commentText.match(/^@[\w\d]+/g)
+    : null;
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
@@ -25,7 +27,10 @@ function EditForm({ commentToEdit, setIsEditing }: EditFormProps) {
     event.preventDefault();
 
     if (commentToEdit.parentId) {
-      editReply({ ...commentToEdit, commentText: `${parentAuthor} ${comment}` });
+      editReply({
+        ...commentToEdit,
+        commentText: `${parentAuthor} ${comment}`,
+      });
     } else {
       editComment({ ...commentToEdit, commentText: comment });
     }
@@ -35,7 +40,10 @@ function EditForm({ commentToEdit, setIsEditing }: EditFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       Edit
-      <textarea value={comment.replace(/^@[\w\d]+\s/g,'')} onChange={handleChange} />
+      <textarea
+        value={comment.replace(/^@[\w\d]+\s/g, "")}
+        onChange={handleChange}
+      />
       <button>Send</button>
     </form>
   );

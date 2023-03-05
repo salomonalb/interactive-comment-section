@@ -122,17 +122,16 @@ function reducer(oldState: commentType[], action: actionType) {
         }
       });
 
-      case ACTION_TYPES.SORT_COMMENTS:
-        return sortComments(oldState)
+    case ACTION_TYPES.SORT_COMMENTS:
+      return sortComments(oldState);
     default:
       return oldState;
   }
 }
 function sortComments(commentsArray: commentType[]) {
-  
-  const newCommentsArray = [...commentsArray]
+  const newCommentsArray = [...commentsArray];
   newCommentsArray.sort((a, b) => b.votes - a.votes);
-  return newCommentsArray
+  return newCommentsArray;
 }
 
 type CommentsDataProviderProps = {
@@ -182,7 +181,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
     dispatch({ type: ACTION_TYPES.EDIT_REPLY, payload: reply });
   }
   function sortStateComments() {
-    dispatch({type: ACTION_TYPES.SORT_COMMENTS, payload: {} as commentType})
+    dispatch({ type: ACTION_TYPES.SORT_COMMENTS, payload: {} as commentType });
   }
 
   return (
@@ -200,7 +199,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
           upvoteReply,
           downvoteReply,
           editReply,
-          sortStateComments
+          sortStateComments,
         }}
       >
         {children}

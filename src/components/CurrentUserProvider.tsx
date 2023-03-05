@@ -28,11 +28,9 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     <>
       <header>
         <p>Change User:</p>
-        <menu>
-          {buttonElements}
-        </menu>
+        <menu>{buttonElements}</menu>
       </header>
-      
+
       <CurrentUser.Provider value={currentUser}>
         {children}
       </CurrentUser.Provider>
