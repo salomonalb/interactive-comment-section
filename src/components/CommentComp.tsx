@@ -4,6 +4,7 @@ import { commentType } from "../types/commentType";
 import { globalData } from "../context/globalData";
 import EditForm from "./EditForm";
 import ReplyForm from "./ReplyForm";
+import DeleteModal from "./DeleteModal";
 
 type commentProps = {
   commentObj: commentType;
@@ -12,6 +13,7 @@ type commentProps = {
 function CommentComp({ commentObj }: commentProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const replies = commentObj.replies.map((reply) => {
     return <CommentComp key={reply.id} commentObj={reply} />;
@@ -37,8 +39,11 @@ function CommentComp({ commentObj }: commentProps) {
     parentAuthor: commentObj.author.username, 
     setIsReplying
   }
-
   function handleDelete() {
+    setIsDeleting(true)
+  }
+
+  function handleDeleteModal() {
     if (commentObj.parentId) {
       deleteReply(commentObj);
     } else {
@@ -82,6 +87,7 @@ function CommentComp({ commentObj }: commentProps) {
   return (
     <article>
       <hr />
+      {isDeleting ? <DeleteModal setIsDeleting={setIsDeleting} handleDeleteModal={handleDeleteModal} /> : null}
       {user.username === commentObj.author.username ? "YOU" : null}
 
       {user.username === commentObj.author.username ? (
@@ -101,13 +107,15 @@ function CommentComp({ commentObj }: commentProps) {
       {user.username !== commentObj.author.username ? (
         <button onClick={handleUpvote}>Arrivoto</button>
       ) : null}
-
+      <p>{commentObj.votes}</p>
       {user.username !== commentObj.author.username ? (
         <button onClick={handleDownvote}>bajivoto</button>
       ) : null}
 
-      <p>{commentObj.votes}</p>
-      <p>{commentObj.author.username}</p>
+      <address>
+        <p>{commentObj.author.username}</p>
+      </address>
+      
       <p>
         <img src={commentObj.author.avatar} />
       </p>
@@ -126,7 +134,7 @@ function CommentComp({ commentObj }: commentProps) {
         <ReplyForm {...replyProps} />
       ) : null}
 
-      <div style={{ paddingLeft: "100px" }}>{replies}</div>
+      <section style={{ paddingLeft: "100px" }}>{replies}</section>
     </article>
   );
 }
