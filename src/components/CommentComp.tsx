@@ -97,6 +97,7 @@ function CommentComp({ commentObj }: commentProps) {
         parentAuthor: commentObj.author.username,
         setIsReplying,
       };
+  
   function handleDelete() {
     setIsDeleting(true);
   }
@@ -130,6 +131,7 @@ function CommentComp({ commentObj }: commentProps) {
     }
     sortStateComments();
   }
+
   function handleReply() {
     setIsReplying((prevIsReplying) => !prevIsReplying);
   }
@@ -213,7 +215,7 @@ function CommentComp({ commentObj }: commentProps) {
       </div>
     </article>
     {isReplying ? <ReplyForm {...replyProps} /> : null}
-    <section>{replies}</section>
+    <section className="reply-section">{replies}</section>
     </>
       );
 }
