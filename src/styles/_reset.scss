@@ -1,0 +1,22 @@
+@use "./variables" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: $font-fam;
+    font-size: 62.5%;
+    @media screen and (min-width: 1441px) {
+      font-size: 0.7vw;
+    }
+  }
+  
+  body {
+    padding-block: 3.3rem;
+    padding-inline: 1.6rem;
+    background-color: $Very-ligh-gray;
+  }
+  

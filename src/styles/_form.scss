@@ -1,0 +1,67 @@
+@use "./variables" as *;
+
+.form {
+    width: 100%;
+    background-color: $White;
+    padding: 1.6rem;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content;
+    &.--reply {
+        margin-bottom: 1.6rem;
+    }
+    &.--edit {
+        padding: 0;
+    }
+
+    &__avatar {
+        width: 3.2rem;
+        height: 3.2rem;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        place-self: center left;
+    }
+    &__input {
+        border: 0.1rem solid $Light-gray;
+        border-radius: 1rem;
+        width: 100%;
+        resize: none;
+        min-height: 10rem;
+        height: min-content;
+        margin-bottom: 1.6rem;
+        color: $Grayish-Blue;
+        font-size: 1.6rem;
+        font-family: $font-fam;
+        line-height: 1.5;
+        padding-block: 1.6rem;
+        padding-inline: 2.4rem;
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+        overflow-y: hidden;
+        &:focus {
+            outline-color: $Moderate-blue;
+        }
+        &::placeholder {
+            color: $Grayish-Blue;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        font-family: $font-fam;
+        }
+    }
+    &__button {
+    background-color: $Moderate-blue;
+    color: $White;
+    font-weight: $Font-medium;
+    font-family: $font-fam;
+    font-size: 1.6rem;
+    border: none;
+    padding-block: 1.6rem;
+    padding-inline: 3.2rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: right;
+    }
+}
