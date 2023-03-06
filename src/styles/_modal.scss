@@ -1,0 +1,62 @@
+@use "./variables" as *;
+
+.modal {
+    &__background {
+        padding-inline: 1.6rem;
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    &__body {
+        background-color: $White;
+        padding: 2.4rem;
+        border-radius: 1rem;
+    }
+    &__title {
+        font-size: 1.9rem;
+        font-weight: $Font-medium;
+        color: $Dark-blue;
+        margin-bottom: 1.5rem;
+    }
+    &__text {
+        color: $Grayish-Blue;
+        font-size: 1.6rem;
+        font-family: $font-fam;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+    &__menu {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__menu-item {
+        list-style-type: none;
+    }
+    &__button {
+        color: $White;
+        font-weight: $Font-medium;
+        font-family: $font-fam;
+        font-size: 1.6rem;
+        border: none;
+        padding-block: 1.6rem;
+        padding-inline: 1.6rem;
+        border-radius: 1rem;
+
+        &.--cancel {
+            background-color: $Grayish-Blue;
+        }
+        &.--delete {
+            background-color: $Soft-Red;
+        }
+    }
+    &__open {
+        overflow: hidden;
+    }
+}
