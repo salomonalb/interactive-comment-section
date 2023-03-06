@@ -1,4 +1,10 @@
-import React, { FormEvent, useState, useContext, useRef, useEffect } from "react";
+import React, {
+  FormEvent,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 import { nanoid } from "nanoid";
 import { CurrentUser } from "../context/CurrentUser";
 import { globalData } from "../context/globalData";
@@ -10,14 +16,13 @@ function CommentForm() {
 
   const { addComment } = useContext(globalData);
 
+  const areaRef = useRef<HTMLTextAreaElement>(null);
 
-  const areaRef = useRef<HTMLTextAreaElement>(null)
-
-  useEffect(()=> {
+  useEffect(() => {
     if (areaRef.current !== null) {
-      areaRef.current.style.height = `${areaRef.current.scrollHeight}px`
+      areaRef.current.style.height = `${areaRef.current.scrollHeight}px`;
     }
-  }, [comment])
+  }, [comment]);
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
@@ -40,15 +45,24 @@ function CommentForm() {
 
     setComment("");
     if (areaRef.current !== null) {
-      areaRef.current.style.height = `10rem`
+      areaRef.current.style.height = `10rem`;
     }
   }
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <img className="form__avatar" src={user.avatar} alt={user.username} />
-      <textarea ref={areaRef} placeholder="Add a Comment..." className="form__input" value={comment} onChange={handleChange} title="Comment" />
-      <button className="form__button" ><p>Send</p></button>
+      <textarea
+        ref={areaRef}
+        placeholder="Add a Comment..."
+        className="form__input"
+        value={comment}
+        onChange={handleChange}
+        title="Comment"
+      />
+      <button className="form__button">
+        <p>Send</p>
+      </button>
     </form>
   );
 }

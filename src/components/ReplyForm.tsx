@@ -1,4 +1,10 @@
-import React, { FormEvent, useState, useContext, useRef, useEffect } from "react";
+import React, {
+  FormEvent,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 import { nanoid } from "nanoid";
 import { CurrentUser } from "../context/CurrentUser";
 import { globalData } from "../context/globalData";
@@ -14,19 +20,19 @@ function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
 
   const user = useContext(CurrentUser);
   const { addReply } = useContext(globalData);
-  const areaRef = useRef<HTMLTextAreaElement>(null)
+  const areaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (areaRef.current !== null) {
-      areaRef.current.focus()
+      areaRef.current.focus();
     }
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (areaRef.current !== null) {
-      areaRef.current.style.height = `${areaRef.current.scrollHeight}px`
+      areaRef.current.style.height = `${areaRef.current.scrollHeight}px`;
     }
-  }, [comment])
+  }, [comment]);
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setComment(event.target.value);
@@ -54,7 +60,13 @@ function ReplyForm({ parentId, parentAuthor, setIsReplying }: ReplyFormProps) {
   return (
     <form className="form --reply" onSubmit={handleSubmit}>
       <img className="form__avatar" src={user.avatar} alt={user.username} />
-      <textarea ref={areaRef} className="form__input" title="reply" value={comment.replace(/^@[\w\d]+\s/g, "")} onChange={handleChange} />
+      <textarea
+        ref={areaRef}
+        className="form__input"
+        title="reply"
+        value={comment.replace(/^@[\w\d]+\s/g, "")}
+        onChange={handleChange}
+      />
       <button className="form__button">Reply</button>
     </form>
   );

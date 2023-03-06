@@ -1,4 +1,10 @@
-import React, { FormEvent, useState, useContext, useEffect, useRef } from "react";
+import React, {
+  FormEvent,
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { globalData } from "../context/globalData";
 import { commentType } from "../types/commentType";
 
@@ -10,21 +16,21 @@ type EditFormProps = {
 function EditForm({ commentToEdit, setIsEditing }: EditFormProps) {
   const [comment, setComment] = useState("");
   const { editComment, editReply } = useContext(globalData);
-  
-  const areaRef = useRef<HTMLTextAreaElement>(null)
+
+  const areaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setComment(commentToEdit.commentText);
     if (areaRef.current !== null) {
-      areaRef.current.focus()
+      areaRef.current.focus();
     }
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (areaRef.current !== null) {
-      areaRef.current.style.height = `${areaRef.current.scrollHeight}px`
+      areaRef.current.style.height = `${areaRef.current.scrollHeight}px`;
     }
-  }, [comment])
+  }, [comment]);
 
   const parentAuthor = commentToEdit.parentId
     ? commentToEdit.commentText.match(/^@[\w\d]+/g)
