@@ -12,52 +12,38 @@ import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
 
 function getTime(date: number): string {
-  const seconds = Math.floor(
-    (Date.now() - date) / 1000
-  )
+  const seconds = Math.floor((Date.now() - date) / 1000);
   if (seconds < 60) {
-    return `${seconds} second${seconds !== 1 ? "s" : ""} ago`
-  } 
+    return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
+  }
 
-  const minutes = Math.floor(
-    seconds / 60
-  )
+  const minutes = Math.floor(seconds / 60);
   if (minutes < 60) {
-    return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`
+    return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
   }
 
-  const hours = Math.floor(
-    minutes / 60
-  )
+  const hours = Math.floor(minutes / 60);
   if (hours < 24) {
-    return `${hours} hour${hours !== 1 ? "s" : ""} ago`
+    return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
   }
 
-  const days = Math.floor(
-    hours / 24
-  )
+  const days = Math.floor(hours / 24);
   if (days < 7) {
-    return `${days} day${days !== 1 ? "s" : ""} ago`
+    return `${days} day${days !== 1 ? "s" : ""} ago`;
   }
 
-  const weeks = Math.floor(
-    days / 7
-  )
+  const weeks = Math.floor(days / 7);
   if (weeks < 4) {
-    return `${weeks} week${weeks !== 1 ? "s" : ""} ago`
+    return `${weeks} week${weeks !== 1 ? "s" : ""} ago`;
   }
 
-  const months = Math.floor(
-    days / 30
-  )
+  const months = Math.floor(days / 30);
   if (months < 12) {
-    return `${months} month${months !== 1 ? "s" : ""} ago`
+    return `${months} month${months !== 1 ? "s" : ""} ago`;
   }
 
-  const years = Math.floor(
-    days / 365
-  )
-  return `${years} year${years !== 1 ? "s" : ""} ago`
+  const years = Math.floor(days / 365);
+  return `${years} year${years !== 1 ? "s" : ""} ago`;
 }
 
 type commentProps = {
@@ -65,7 +51,6 @@ type commentProps = {
 };
 
 function CommentComp({ commentObj }: commentProps) {
-
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -97,7 +82,7 @@ function CommentComp({ commentObj }: commentProps) {
         parentAuthor: commentObj.author.username,
         setIsReplying,
       };
-  
+
   function handleDelete() {
     setIsDeleting(true);
   }
@@ -150,74 +135,91 @@ function CommentComp({ commentObj }: commentProps) {
   return (
     <>
       <article className="comment">
-      {isDeleting ? (
-        <DeleteModal
-          setIsDeleting={setIsDeleting}
-          handleDeleteModal={handleDeleteModal}
-        />
-      ) : null}
+        {isDeleting ? (
+          <DeleteModal
+            setIsDeleting={setIsDeleting}
+            handleDeleteModal={handleDeleteModal}
+          />
+        ) : null}
 
-      <div className="comment__votes-container">
-          <button className="comment__upvote" onClick={ user.username !== commentObj.author.username ? handleUpvote: undefined}>
+        <div className="comment__votes-container">
+          <button
+            className="comment__upvote"
+            onClick={
+              user.username !== commentObj.author.username
+                ? handleUpvote
+                : undefined
+            }
+          >
             <img src={plusIcon} alt="upvote" />
           </button>
 
-        <p className="comment__votes">{commentObj.votes}</p>
+          <p className="comment__votes">{commentObj.votes}</p>
 
-          <button className="comment__downvote" onClick={user.username !== commentObj.author.username ? handleDownvote: undefined}>
+          <button
+            className="comment__downvote"
+            onClick={
+              user.username !== commentObj.author.username
+                ? handleDownvote
+                : undefined
+            }
+          >
             <img src={minusIcon} alt="downvote" />
           </button>
-      </div>
-
-      <div className="comment__info-container">
-        <div className="comment__avatar-container">
-          <img className="comment__avatar"
-            src={commentObj.author.avatar}
-            alt={commentObj.author.username}
-          />
         </div>
-        <address className="comment__username-container" >
-          <p className="comment__username" >{commentObj.author.username}</p>
+
+        <div className="comment__info-container">
+          <div className="comment__avatar-container">
+            <img
+              className="comment__avatar"
+              src={commentObj.author.avatar}
+              alt={commentObj.author.username}
+            />
+          </div>
+          <address className="comment__username-container">
+            <p className="comment__username">{commentObj.author.username}</p>
+            {user.username === commentObj.author.username ? (
+              <span className="comment__tag">you</span>
+            ) : null}
+          </address>
+          <time className="comment__date" dateTime="">
+            {getTime(commentObj.date)}
+          </time>
+        </div>
+
+        <div className="comment__options-container">
           {user.username === commentObj.author.username ? (
-            <span className="comment__tag">you</span>
+            <button className="comment__delete" onClick={handleDelete}>
+              <img src={deleteIcon} alt="delete" />
+              Delete
+            </button>
           ) : null}
-        </address>
-        <time className="comment__date" dateTime="">{getTime(commentObj.date)}</time>
-      </div>
+          {user.username !== commentObj.author.username ? (
+            <button className="comment__reply" onClick={handleReply}>
+              <img src={replyIcon} alt="reply" />
+              Reply
+            </button>
+          ) : null}
+          {user.username === commentObj.author.username ? (
+            <button className="comment__edit" onClick={handleEdit}>
+              <img src={editIcon} alt="edit" />
+              Edit
+            </button>
+          ) : null}
+        </div>
 
-      <div className="comment__options-container">
-      {user.username === commentObj.author.username ? (
-          <button className="comment__delete" onClick={handleDelete}>
-            <img src={deleteIcon} alt="delete"/>
-            Delete
-          </button>
-        ) : null}
-        {user.username !== commentObj.author.username ? (
-          <button className="comment__reply" onClick={handleReply}>
-            <img src={replyIcon} alt="reply"/>
-            Reply
-          </button>
-        ) : null}
-        {user.username === commentObj.author.username ? (
-          <button className="comment__edit" onClick={handleEdit}>
-            <img src={editIcon} alt="edit"/>
-            Edit
-          </button>
-        ) : null}
-      </div>
-
-      <div className="comment__text-container">
-        {isEditing ? (
-          <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
-        ) : (
-          <p className="comment__text">{commentObj.commentText}</p>
-        )}
-      </div>
-    </article>
-    {isReplying ? <ReplyForm {...replyProps} /> : null}
-    <section className="reply-section">{replies}</section>
+        <div className="comment__text-container">
+          {isEditing ? (
+            <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
+          ) : (
+            <p className="comment__text">{commentObj.commentText}</p>
+          )}
+        </div>
+      </article>
+      {isReplying ? <ReplyForm {...replyProps} /> : null}
+      <section className="reply-section">{replies}</section>
     </>
-      );
+  );
 }
 
 export default CommentComp;
