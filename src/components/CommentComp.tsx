@@ -7,6 +7,9 @@ import ReplyForm from "./ReplyForm";
 import DeleteModal from "./DeleteModal";
 import plusIcon from "../assets/images/icon-plus.svg";
 import minusIcon from "../assets/images/icon-minus.svg";
+import replyIcon from "../assets/images/icon-reply.svg";
+import deleteIcon from "../assets/images/icon-delete.svg";
+import editIcon from "../assets/images/icon-edit.svg";
 
 function getTime(date: number): string {
   const seconds = Math.floor(
@@ -62,6 +65,7 @@ type commentProps = {
 };
 
 function CommentComp({ commentObj }: commentProps) {
+
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -71,6 +75,7 @@ function CommentComp({ commentObj }: commentProps) {
   });
 
   const user = useContext(CurrentUser);
+
   const {
     deleteComment,
     upvoteComment,
@@ -141,7 +146,8 @@ function CommentComp({ commentObj }: commentProps) {
   // to their own files later
 
   return (
-    <article className="comment">
+    <>
+      <article className="comment">
       {isDeleting ? (
         <DeleteModal
           setIsDeleting={setIsDeleting}
@@ -177,33 +183,39 @@ function CommentComp({ commentObj }: commentProps) {
         <time className="comment__date" dateTime="">{getTime(commentObj.date)}</time>
       </div>
 
-      <div>
+      <div className="comment__options-container">
       {user.username === commentObj.author.username ? (
-          <button onClick={handleDelete}>Delete This Comment</button>
+          <button className="comment__delete" onClick={handleDelete}>
+            <img src={deleteIcon} alt="delete"/>
+            Delete
+          </button>
         ) : null}
         {user.username !== commentObj.author.username ? (
-          <button onClick={handleReply}>Reply to This Comment</button>
+          <button className="comment__reply" onClick={handleReply}>
+            <img src={replyIcon} alt="reply"/>
+            Reply
+          </button>
         ) : null}
         {user.username === commentObj.author.username ? (
-          <button onClick={handleEdit}>
-            {isEditing ? "Editing" : "Edit This Comment"}
+          <button className="comment__edit" onClick={handleEdit}>
+            <img src={editIcon} alt="edit"/>
+            Edit
           </button>
         ) : null}
       </div>
 
-      <div>
+      <div className="comment__text-container">
         {isEditing ? (
           <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
         ) : (
-          <p>{commentObj.commentText}</p>
+          <p className="comment__text">{commentObj.commentText}</p>
         )}
       </div>
-
-      {isReplying ? <ReplyForm {...replyProps} /> : null}
-
-      <section style={{ paddingLeft: "100px" }}>{replies}</section>
     </article>
-  );
+    {isReplying ? <ReplyForm {...replyProps} /> : null}
+    <section>{replies}</section>
+    </>
+      );
 }
 
 export default CommentComp;
