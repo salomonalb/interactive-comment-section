@@ -15,10 +15,10 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   }
   const buttonElements = USERS_ARRAY.map((user, index) => {
     return (
-      <li>
-        <button key={user.username} value={index} onClick={changeUser}>
-          <img src={user.avatar} alt={`${user.username} avatar`} />
-          <p>{user.username}</p>
+      <li className="header__menu-item">
+        <button className="header__button" key={user.username} value={index} onClick={changeUser}>
+          <img className="header__avatar" src={user.avatar} alt={`${user.username} avatar`} />
+          <p className="header__username">{user.username}</p>
         </button>
       </li>
     );
@@ -26,9 +26,9 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   return (
     <>
-      <header>
-        <p>Change User:</p>
-        <menu>{buttonElements}</menu>
+      <header className="header">
+        <p className="header__text">Change User:</p>
+        <menu className="header__menu">{buttonElements}</menu>
       </header>
 
       <CurrentUser.Provider value={currentUser}>
