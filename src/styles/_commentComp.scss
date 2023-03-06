@@ -12,7 +12,7 @@
     width: max-content;
     padding: 1.6rem;
     border-radius: 1rem;
-    gap: 1.6rem;
+    gap: 1.5rem;
     align-items: center;
   }
   &__upvote,
@@ -21,10 +21,49 @@
     border: none;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   &__votes {
     font-weight: $Font-heavy;
     color: $Moderate-blue;
     font-size: 1.5rem;
+  }
+  &__info-container {
+    display: flex;
+    gap: 1.6rem;
+    align-content: center;
+  }
+  &__avatar-container {
+    width: max-content;
+    display: grid;
+    place-items: center;
+  }
+  &__avatar {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+  &__username-container {
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+    justify-content: center;
+  }
+  &__username {
+    font-weight: $Font-heavy;
+    font-style: normal;
+    font-size: 1.55rem;
+  }
+  &__tag {
+    font-style: normal;
+    color: $White;
+    background-color: $Moderate-blue;
+    padding: .6rem;
+    font-weight: $Font-medium;
+    border-radius: .5rem;
+  }
+  &__date {
+    color: $Grayish-Blue;
+    display: grid;
+    place-items: center;
   }
 }

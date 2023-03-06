@@ -88,6 +88,9 @@ function CommentComp({ commentObj }: commentProps) {
     setIsReplying(false);
   }, [user]);
 
+  // i can move the votes component, the info component, and the actions component
+  // to their own files later
+
   return (
     <article className="comment">
       {isDeleting ? (
@@ -98,44 +101,35 @@ function CommentComp({ commentObj }: commentProps) {
       ) : null}
 
       <div className="comment__votes-container">
-        {user.username !== commentObj.author.username ? (
-          <button className="comment__upvote" onClick={handleUpvote}>
+          <button className="comment__upvote" onClick={ user.username !== commentObj.author.username ? handleUpvote: undefined}>
             <img src={plusIcon} alt="upvote" />
           </button>
-        ) : (
-          <button className="comment__upvote">
-            <img src={plusIcon} alt="upvote" />
-          </button>
-        )}
 
         <p className="comment__votes">{commentObj.votes}</p>
 
-        {user.username !== commentObj.author.username ? (
-          <button className="comment__downvote" onClick={handleDownvote}>
+          <button className="comment__downvote" onClick={user.username !== commentObj.author.username ? handleDownvote: undefined}>
             <img src={minusIcon} alt="downvote" />
           </button>
-        ) : (
-          <button className="comment__downvote">
-            <img src={minusIcon} alt="downvote" />
-          </button>
-        )}
       </div>
 
-      <div>
-        <p>
-          <img
+      <div className="comment__info-container">
+        <div className="comment__avatar-container">
+          <img className="comment__avatar"
             src={commentObj.author.avatar}
             alt={commentObj.author.username}
           />
-        </p>
-        <address>
-          <p>{commentObj.author.username}</p>
+        </div>
+        <address className="comment__username-container" >
+          <p className="comment__username" >{commentObj.author.username}</p>
           {user.username === commentObj.author.username ? (
-            <span>You</span>
+            <span className="comment__tag">you</span>
           ) : null}
         </address>
-        <p>{commentObj.date}</p>
-        {user.username === commentObj.author.username ? (
+        <time className="comment__date" dateTime="">{commentObj.date}</time>
+      </div>
+
+      <div>
+      {user.username === commentObj.author.username ? (
           <button onClick={handleDelete}>Delete This Comment</button>
         ) : null}
         {user.username !== commentObj.author.username ? (
