@@ -1,6 +1,15 @@
 @use "./variables" as *;
 
 .reply-section {
-  padding-left: 1.6rem;
+  padding-left: min(4.3vw, 4.3rem);
   border-left: 0.2rem solid $Light-gray;
+  width: min(100%, 75rem);
+  margin-bottom: min(4.3vw, 2rem);
+  & .comment:last-child {
+    margin-bottom: 0;
+  }
+  &__container {
+  width: min(100%, 75rem);
+  padding-left: clamp(0px, calc(10vw - 4rem), 4rem);
+}
 }

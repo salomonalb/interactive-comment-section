@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { ReactComponentElement, useContext, useEffect, useState } from "react";
 import { CurrentUser } from "../context/CurrentUser";
 import { commentType } from "../types/commentType";
 import { globalData } from "../context/globalData";
@@ -55,9 +55,13 @@ function CommentComp({ commentObj }: commentProps) {
   const [isReplying, setIsReplying] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const replies = commentObj.replies.map((reply) => {
-    return <CommentComp key={reply.id} commentObj={reply} />;
-  });
+  let replies: JSX.Element[] = [];
+  if (commentObj.replies.length > 0) {
+    replies = commentObj.replies.map((reply) => {
+      return <CommentComp key={reply.id} commentObj={reply} />;
+    });
+  }
+  
 
   const user = useContext(CurrentUser);
 
@@ -217,7 +221,10 @@ function CommentComp({ commentObj }: commentProps) {
         </div>
       </article>
       {isReplying ? <ReplyForm {...replyProps} /> : null}
-      <section className="reply-section">{replies}</section>
+      <div className="reply-section__container">
+      {replies.length > 0 ? <section className="reply-section">{replies}</section> : null}
+      </div>
+      
     </>
   );
 }
