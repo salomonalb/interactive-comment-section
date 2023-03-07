@@ -4,7 +4,7 @@
   width: min(100%, 75rem);
   background-color: $White;
   padding: min(4.3vw, 2.6rem); //1.6rem;
-  margin-bottom: min(4.3vw, 2rem); //1.6rem;
+  margin-bottom: min(4.3vw, 2rem); 
   border-radius: 1rem;
   display: grid;
   align-items: center;
@@ -86,9 +86,12 @@
   }
   &__date {
     color: $Grayish-Blue;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
     font-size: 1.6rem;
+    width: max-content;
   }
   &__options-container {
     display: flex;

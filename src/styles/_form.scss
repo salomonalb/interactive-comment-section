@@ -1,7 +1,8 @@
 @use "./variables" as *;
 
 .form {
-  width: 100%;
+  width: min(100%, 75rem);
+  margin: auto;
   background-color: $White;
   padding: 1.6rem;
   border-radius: 1rem;
@@ -14,6 +15,11 @@
   &.--edit {
     padding: 0;
   }
+  @media (min-width: $breakpoint1) {
+    grid-template-rows: min-content;
+    grid-template-columns: min-content 1fr min-content;
+    column-gap: 1.6rem;
+  }
 
   &__avatar {
     width: 3.2rem;
@@ -21,6 +27,11 @@
     grid-column: 1 / 2;
     grid-row: 2 / 3;
     place-self: center left;
+    @media (min-width: $breakpoint1) {
+      grid-row: 1 / 2;
+      justify-self: left;
+      align-self: start;
+    }
   }
   &__input {
     border: 0.1rem solid $Light-gray;
@@ -38,6 +49,9 @@
     grid-column: 1 / -1;
     grid-row: 1 / 2;
     overflow-y: hidden;
+    @media (min-width: $breakpoint1) {
+      grid-column: 2 / 3;
+    }
     &:focus {
       outline-color: $Moderate-blue;
     }
@@ -62,5 +76,11 @@
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     justify-self: right;
+    @media (min-width: $breakpoint1) {
+      grid-row: 1 / 2;
+      grid-column: 3 / 4;
+      justify-self: right;
+      align-self: start;
+    }
   }
 }
