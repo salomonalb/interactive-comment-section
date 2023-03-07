@@ -27,7 +27,6 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
             src={user.avatar}
             alt={`${user.username} avatar`}
           />
-          {user.username === currentUser.username ? <span className="header__tag">you</span> : null }
           <p className="header__username">{user.username}</p>
         </button>
       </li>
