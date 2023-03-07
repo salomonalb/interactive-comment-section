@@ -27,15 +27,15 @@
     @media (min-width: 750px) {
       overflow-x: hidden;
     }
-    
+
     &::-webkit-scrollbar {
-        background-color: $Light-gray;
-        border-radius: 50rem;
-        height: 1.3rem;
+      background-color: $Light-gray;
+      border-radius: 50rem;
+      height: 1.3rem;
     }
     &::-webkit-scrollbar-thumb {
-        background-color: $Moderate-blue;
-        border-radius: 50rem;
+      background-color: $Moderate-blue;
+      border-radius: 50rem;
     }
   }
   &__menu-item {

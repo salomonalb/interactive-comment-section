@@ -61,7 +61,6 @@ function CommentComp({ commentObj }: commentProps) {
       return <CommentComp key={reply.id} commentObj={reply} />;
     });
   }
-  
 
   const user = useContext(CurrentUser);
 
@@ -221,9 +220,12 @@ function CommentComp({ commentObj }: commentProps) {
         </div>
       </article>
       {isReplying ? <ReplyForm {...replyProps} /> : null}
-      <div className="reply-section__container">
-      {replies.length > 0 ? <section className="reply-section">{replies}</section> : null}
-      </div>
+
+        {replies.length > 0 ? (
+          <div className="reply-section__container">
+            <section className="reply-section">{replies}</section>
+          </div>
+        ) : null}
       
     </>
   );

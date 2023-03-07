@@ -9,7 +9,7 @@
     margin-bottom: 0;
   }
   &__container {
-  width: min(100%, 75rem);
-  padding-left: clamp(0px, calc(10vw - 4rem), 4rem);
-}
+    width: min(100%, 75rem);
+    padding-left: clamp(0px, calc(10vw - 4rem), 4rem);
+  }
 }
