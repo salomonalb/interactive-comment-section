@@ -11,13 +11,13 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   function changeUser(event: React.MouseEvent<HTMLButtonElement>): void {
     const index = Number((event.currentTarget as HTMLButtonElement).value);
-    setCurrentUser(USERS_ARRAY[index]);
+    setCurrentUser(USERS_ARRAY[index]); 
   }
   const buttonElements = USERS_ARRAY.map((user, index) => {
     return (
       <li className="header__menu-item">
         <button
-          className="header__button"
+          className={`header__button ${user.username === currentUser.username ? "--active" : null }`}
           key={user.username}
           value={index}
           onClick={changeUser}
@@ -27,6 +27,7 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
             src={user.avatar}
             alt={`${user.username} avatar`}
           />
+          {user.username === currentUser.username ? <span className="header__tag">you</span> : null }
           <p className="header__username">{user.username}</p>
         </button>
       </li>
@@ -39,7 +40,6 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
         <p className="header__text">Change User:</p>
         <menu className="header__menu">{buttonElements}</menu>
       </header>
-
       <CurrentUser.Provider value={currentUser}>
         {children}
       </CurrentUser.Provider>
