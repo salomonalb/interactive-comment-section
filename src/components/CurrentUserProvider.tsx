@@ -18,7 +18,7 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
       <li className="header__menu-item">
         <button
           className={`header__button ${
-            user.username === currentUser.username ? "--active" : null
+            user.username === currentUser.username ? "--active" : ""
           }`}
           key={user.username}
           value={index}

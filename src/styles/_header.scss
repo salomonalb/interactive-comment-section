@@ -24,6 +24,15 @@
     justify-content: space-between;
     padding-block: 1.6rem;
     padding-inline: 0.2rem;
+    &::-webkit-scrollbar {
+        background-color: $Light-gray;
+        border-radius: 50rem;
+        height: 1.3rem;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $Moderate-blue;
+        border-radius: 50rem;
+    }
   }
   &__menu-item {
     list-style: none;
