@@ -8,7 +8,7 @@ function CommentsList() {
     return <CommentComp key={commentObj.id} commentObj={commentObj} />;
   });
 
-  return <>{commentComponents}</>;
+  return <main className="comments-list">{commentComponents}</main>;
 }
 
 export default CommentsList;

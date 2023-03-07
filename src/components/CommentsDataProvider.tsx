@@ -185,7 +185,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
   }
 
   return (
-    <main>
+    <>
       <globalData.Provider
         value={{
           data: state,
@@ -204,7 +204,7 @@ function CommentsDataProvider({ children }: CommentsDataProviderProps) {
       >
         {children}
       </globalData.Provider>
-    </main>
+    </>
   );
 }
 
