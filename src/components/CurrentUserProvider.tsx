@@ -11,13 +11,15 @@ function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   function changeUser(event: React.MouseEvent<HTMLButtonElement>): void {
     const index = Number((event.currentTarget as HTMLButtonElement).value);
-    setCurrentUser(USERS_ARRAY[index]); 
+    setCurrentUser(USERS_ARRAY[index]);
   }
   const buttonElements = USERS_ARRAY.map((user, index) => {
     return (
       <li className="header__menu-item">
         <button
-          className={`header__button ${user.username === currentUser.username ? "--active" : null }`}
+          className={`header__button ${
+            user.username === currentUser.username ? "--active" : null
+          }`}
           key={user.username}
           value={index}
           onClick={changeUser}
