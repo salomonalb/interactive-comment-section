@@ -164,5 +164,11 @@
     color: $Grayish-Blue;
     font-size: 1.6rem;
     line-height: 1.5;
+    
+    &--highlight {
+      color: $Moderate-blue;
+      font-weight: $Font-medium;
+      cursor: pointer;
+    }
   }
 }

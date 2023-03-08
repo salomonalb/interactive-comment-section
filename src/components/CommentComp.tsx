@@ -1,4 +1,4 @@
-import { ReactComponentElement, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CurrentUser } from "../context/CurrentUser";
 import { commentType } from "../types/commentType";
 import { globalData } from "../context/globalData";
@@ -215,7 +215,13 @@ function CommentComp({ commentObj }: commentProps) {
           {isEditing ? (
             <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
           ) : (
-            <p className="comment__text">{commentObj.commentText}</p>
+            <p className="comment__text">{commentObj.commentText.split(' ').map((word => {
+              const regex = /^@[\w\d]+/g
+              if (regex.test(word)) {
+                return <span className="comment__text--highlight">{word} </span>
+              }
+              return `${word} `
+            }))}</p>
           )}
         </div>
       </article>
