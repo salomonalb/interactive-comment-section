@@ -49,6 +49,12 @@
     padding-block: 1.6rem;
     padding-inline: 1.6rem;
     border-radius: 1rem;
+    cursor: pointer;
+    transition: transform 200ms;
+    &:hover {
+      transform: scale(1.06);
+      opacity: 0.7;
+    }
 
     &.--cancel {
       background-color: $Grayish-Blue;

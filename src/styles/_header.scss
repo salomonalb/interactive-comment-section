@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 3.2rem;
-  max-width: 75rem;
+  max-width: 77rem;
   margin-inline: auto;
 
   &__text {
@@ -23,7 +23,7 @@
     overflow-x: scroll;
     justify-content: space-between;
     padding-block: 1.6rem;
-    padding-inline: 0.2rem;
+    padding-inline: 0.7rem;
     @media (min-width: 750px) {
       overflow-x: hidden;
     }
@@ -52,6 +52,12 @@
     gap: 1.6rem;
     align-items: center;
     position: relative;
+    transition: transform 200ms;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.06);
+      outline: .1rem solid $Light-grayish-blue;
+    }
     &.--active {
       outline: 0.2rem solid $Moderate-blue;
     }
