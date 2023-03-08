@@ -6,11 +6,10 @@ import EditForm from "./EditForm";
 import ReplyForm from "./ReplyForm";
 import DeleteModal from "./DeleteModal";
 import { getTime } from "../functions/getTime";
-import plusIcon from "../assets/images/icon-plus.svg";
-import minusIcon from "../assets/images/icon-minus.svg";
 import replyIcon from "../assets/images/icon-reply.svg";
 import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
+import Votes from "./votes";
 
 
 type commentProps = {
@@ -112,31 +111,8 @@ function CommentComp({ commentObj }: commentProps) {
           />
         ) : null}
 
-        <div className="comment__votes-container">
-          <button
-            className="comment__upvote"
-            onClick={
-              user.username !== commentObj.author.username
-                ? handleUpvote
-                : undefined
-            }
-          >
-            <img src={plusIcon} alt="upvote" />
-          </button>
+        <Votes user={user} commentObj={commentObj} handleDownvote={handleDownvote} handleUpvote={handleUpvote}  />
 
-          <p className="comment__votes">{commentObj.votes}</p>
-
-          <button
-            className="comment__downvote"
-            onClick={
-              user.username !== commentObj.author.username
-                ? handleDownvote
-                : undefined
-            }
-          >
-            <img src={minusIcon} alt="downvote" />
-          </button>
-        </div>
 
         <div className="comment__info-container">
           <div className="comment__avatar-container">
