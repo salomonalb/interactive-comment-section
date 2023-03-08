@@ -8,7 +8,7 @@ import DeleteModal from "./DeleteModal";
 import replyIcon from "../assets/images/icon-reply.svg";
 import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
-import Votes from "./votes";
+import Votes from "./Votes";
 import Info from "./Info";
 
 
@@ -109,7 +109,6 @@ function CommentComp({ commentObj }: commentProps) {
         ) : null}
 
         <Votes user={user} commentObj={commentObj} handleDownvote={handleDownvote} handleUpvote={handleUpvote}  />
-
 
         <Info user={user} commentObj={commentObj} />
 

@@ -1,0 +1,53 @@
+@use "./variables" as *;
+
+.comment {
+    
+  &__info-container {
+    display: flex;
+    gap: 1.6rem;
+    align-content: center;
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    @media (min-width: $breakpoint1) {
+      grid-column: 2 / 3;
+    }
+  }
+  &__avatar-container {
+    width: max-content;
+    display: grid;
+    place-items: center;
+  }
+  &__avatar {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+  &__username-container {
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+    justify-content: center;
+  }
+  &__username {
+    font-weight: $Font-heavy;
+    font-style: normal;
+    font-size: 1.6rem;
+    color: $Dark-blue;
+  }
+  &__tag {
+    font-style: normal;
+    color: $White;
+    background-color: $Moderate-blue;
+    padding: 0.6rem;
+    font-weight: $Font-medium;
+    border-radius: 0.5rem;
+  }
+  &__date {
+    color: $Grayish-Blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    font-size: 1.6rem;
+    width: max-content;
+  }
+}
