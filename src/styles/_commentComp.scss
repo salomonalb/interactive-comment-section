@@ -19,9 +19,7 @@
     display: flex;
     background-color: $Very-ligh-gray;
     width: max-content;
-    padding: 1.2rem;
     border-radius: 1rem;
-    gap: 1.6rem;
     align-items: center;
     grid-column: 1 / 2;
     grid-row: 3 / 4;
@@ -39,6 +37,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1.2rem;
+    cursor: pointer;
+    transition: transform 200ms;
+    &:hover {
+      transform: scale(1.25);
+    }
+  }
+  &__upvote {
+    padding-right: 1.6rem;
+    @media (min-width: $breakpoint1) {
+      padding: 1.2rem;
+      padding-bottom: 1.6rem;
+    }
+  }
+  &__downvote {
+    padding-left: 1.6rem; 
+      @media (min-width: $breakpoint1) {
+        padding: 1.2rem;
+        padding-top: 1.6rem;
+      }
   }
   &__votes {
     font-weight: $Font-medium;
