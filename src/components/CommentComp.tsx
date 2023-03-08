@@ -215,24 +215,27 @@ function CommentComp({ commentObj }: commentProps) {
           {isEditing ? (
             <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
           ) : (
-            <p className="comment__text">{commentObj.commentText.split(' ').map((word => {
-              const regex = /^@[\w\d]+/g
-              if (regex.test(word)) {
-                return <span className="comment__text--highlight">{word} </span>
-              }
-              return `${word} `
-            }))}</p>
+            <p className="comment__text">
+              {commentObj.commentText.split(" ").map((word) => {
+                const regex = /^@[\w\d]+/g;
+                if (regex.test(word)) {
+                  return (
+                    <span className="comment__text--highlight">{word} </span>
+                  );
+                }
+                return `${word} `;
+              })}
+            </p>
           )}
         </div>
       </article>
       {isReplying ? <ReplyForm {...replyProps} /> : null}
 
-        {replies.length > 0 ? (
-          <div className="reply-section__container">
-            <section className="reply-section">{replies}</section>
-          </div>
-        ) : null}
-      
+      {replies.length > 0 ? (
+        <div className="reply-section__container">
+          <section className="reply-section">{replies}</section>
+        </div>
+      ) : null}
     </>
   );
 }

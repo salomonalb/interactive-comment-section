@@ -4,7 +4,7 @@
   width: min(100%, 75rem);
   background-color: $White;
   padding: min(4.3vw, 2.6rem); //1.6rem;
-  margin-bottom: min(4.3vw, 2rem); 
+  margin-bottom: min(4.3vw, 2rem);
   border-radius: 1rem;
   display: grid;
   align-items: center;
@@ -54,11 +54,11 @@
     }
   }
   &__downvote {
-    padding-left: 1.6rem; 
-      @media (min-width: $breakpoint1) {
-        padding: 1.2rem;
-        padding-top: 1.6rem;
-      }
+    padding-left: 1.6rem;
+    @media (min-width: $breakpoint1) {
+      padding: 1.2rem;
+      padding-top: 1.6rem;
+    }
   }
   &__votes {
     font-weight: $Font-medium;
@@ -164,7 +164,7 @@
     color: $Grayish-Blue;
     font-size: 1.6rem;
     line-height: 1.5;
-    
+
     &--highlight {
       color: $Moderate-blue;
       font-weight: $Font-medium;
