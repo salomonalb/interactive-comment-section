@@ -5,11 +5,11 @@ import { globalData } from "../context/globalData";
 import EditForm from "./EditForm";
 import ReplyForm from "./ReplyForm";
 import DeleteModal from "./DeleteModal";
-import { getTime } from "../functions/getTime";
 import replyIcon from "../assets/images/icon-reply.svg";
 import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
 import Votes from "./votes";
+import Info from "./Info";
 
 
 type commentProps = {
@@ -98,9 +98,6 @@ function CommentComp({ commentObj }: commentProps) {
     setIsReplying(false);
   }, [user]);
 
-  // i can move the votes component, the info component, and the actions component
-  // to their own files later
-
   return (
     <>
       <article className="comment">
@@ -114,24 +111,7 @@ function CommentComp({ commentObj }: commentProps) {
         <Votes user={user} commentObj={commentObj} handleDownvote={handleDownvote} handleUpvote={handleUpvote}  />
 
 
-        <div className="comment__info-container">
-          <div className="comment__avatar-container">
-            <img
-              className="comment__avatar"
-              src={commentObj.author.avatar}
-              alt={commentObj.author.username}
-            />
-          </div>
-          <address className="comment__username-container">
-            <p className="comment__username">{commentObj.author.username}</p>
-            {user.username === commentObj.author.username ? (
-              <span className="comment__tag">you</span>
-            ) : null}
-          </address>
-          <time className="comment__date" dateTime="">
-            {getTime(commentObj.date)}
-          </time>
-        </div>
+        <Info user={user} commentObj={commentObj} />
 
         <div className="comment__options-container">
           {user.username === commentObj.author.username ? (
