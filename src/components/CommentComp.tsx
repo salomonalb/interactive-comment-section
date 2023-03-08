@@ -8,6 +8,7 @@ import DeleteModal from "./DeleteModal";
 import Votes from "./Votes";
 import Info from "./Info";
 import Options from "./Options";
+import Text from "./Text";
 
 
 type commentProps = {
@@ -116,23 +117,11 @@ function CommentComp({ commentObj }: commentProps) {
           handleReply={handleReply}
         />
 
-        
-
         <div className="comment__text-container">
           {isEditing ? (
             <EditForm setIsEditing={setIsEditing} commentToEdit={commentObj} />
           ) : (
-            <p className="comment__text">
-              {commentObj.commentText.split(" ").map((word) => {
-                const regex = /^@[\w\d]+/g;
-                if (regex.test(word)) {
-                  return (
-                    <span className="comment__text--highlight">{word} </span>
-                  );
-                }
-                return `${word} `;
-              })}
-            </p>
+            <Text commentObj={commentObj} />
           )}
         </div>
       </article>
