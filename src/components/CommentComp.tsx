@@ -5,11 +5,9 @@ import { globalData } from "../context/globalData";
 import EditForm from "./EditForm";
 import ReplyForm from "./ReplyForm";
 import DeleteModal from "./DeleteModal";
-import replyIcon from "../assets/images/icon-reply.svg";
-import deleteIcon from "../assets/images/icon-delete.svg";
-import editIcon from "../assets/images/icon-edit.svg";
 import Votes from "./Votes";
 import Info from "./Info";
+import Options from "./Options";
 
 
 type commentProps = {
@@ -112,26 +110,13 @@ function CommentComp({ commentObj }: commentProps) {
 
         <Info user={user} commentObj={commentObj} />
 
-        <div className="comment__options-container">
-          {user.username === commentObj.author.username ? (
-            <button className="comment__delete" onClick={handleDelete}>
-              <img src={deleteIcon} alt="delete" />
-              Delete
-            </button>
-          ) : null}
-          {user.username !== commentObj.author.username ? (
-            <button className="comment__reply" onClick={handleReply}>
-              <img src={replyIcon} alt="reply" />
-              Reply
-            </button>
-          ) : null}
-          {user.username === commentObj.author.username ? (
-            <button className="comment__edit" onClick={handleEdit}>
-              <img src={editIcon} alt="edit" />
-              Edit
-            </button>
-          ) : null}
-        </div>
+        <Options user={user} commentObj={commentObj} 
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleReply={handleReply}
+        />
+
+        
 
         <div className="comment__text-container">
           {isEditing ? (
