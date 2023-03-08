@@ -39,9 +39,11 @@
     justify-content: center;
     padding: 1.2rem;
     cursor: pointer;
-    transition: transform 200ms;
+    transition: all 200ms;
+    opacity: 0.5;
     &:hover {
-      transform: scale(1.25);
+      transform: scale(1.125);
+      opacity: 1;
     }
   }
   &__upvote {
