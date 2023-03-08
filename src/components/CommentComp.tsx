@@ -10,7 +10,6 @@ import Info from "./Info";
 import Options from "./Options";
 import Text from "./Text";
 
-
 type commentProps = {
   commentObj: commentType;
 };
@@ -107,11 +106,18 @@ function CommentComp({ commentObj }: commentProps) {
           />
         ) : null}
 
-        <Votes user={user} commentObj={commentObj} handleDownvote={handleDownvote} handleUpvote={handleUpvote}  />
+        <Votes
+          user={user}
+          commentObj={commentObj}
+          handleDownvote={handleDownvote}
+          handleUpvote={handleUpvote}
+        />
 
         <Info user={user} commentObj={commentObj} />
 
-        <Options user={user} commentObj={commentObj} 
+        <Options
+          user={user}
+          commentObj={commentObj}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           handleReply={handleReply}

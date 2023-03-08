@@ -5,7 +5,6 @@ import { commentType } from "../types/commentType";
 import { ACTION_TYPES } from "../constants/ACTION_TYPES";
 import reducer from "../functions/reducer";
 
-
 type CommentsDataProviderProps = {
   children: ReactNode[];
 };
