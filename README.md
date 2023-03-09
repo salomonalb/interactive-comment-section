@@ -31,4 +31,4 @@ To preserve the state of the application, I implemented the useEffect hook to sa
 
 
 
-The Design of the project is based on challenche present in (FrontendMentor)[https://www.frontendmentor.io]
+The Design of the project is based on challenche present in [FrontendMentor](https://www.frontendmentor.io)
