@@ -1,4 +1,3 @@
-import React from "react";
 import { commentType } from "../types/commentType";
 import { user } from "../types/userType";
 import plusIcon from "../images/icons/icon-plus.svg";

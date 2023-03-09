@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { CurrentUser } from "../context/CurrentUser";
 import { commentType } from "../types/commentType";
+import { CurrentUser } from "../context/CurrentUser";
 import { globalData } from "../context/globalData";
-import EditForm from "./EditForm";
-import ReplyForm from "./ReplyForm";
-import DeleteModal from "./DeleteModal";
 import Votes from "./Votes";
 import Info from "./Info";
 import Options from "./Options";
 import Text from "./Text";
+import EditForm from "./EditForm";
+import ReplyForm from "./ReplyForm";
+import DeleteModal from "./DeleteModal";
 
 type commentProps = {
   commentObj: commentType;
@@ -99,12 +99,6 @@ function CommentComp({ commentObj }: commentProps) {
   return (
     <>
       <article className="comment">
-        {isDeleting ? (
-          <DeleteModal
-            setIsDeleting={setIsDeleting}
-            handleDeleteModal={handleDeleteModal}
-          />
-        ) : null}
 
         <Votes
           user={user}
@@ -131,6 +125,14 @@ function CommentComp({ commentObj }: commentProps) {
           )}
         </div>
       </article>
+
+      {isDeleting ? (
+          <DeleteModal
+            setIsDeleting={setIsDeleting}
+            handleDeleteModal={handleDeleteModal}
+          />
+        ) : null}
+        
       {isReplying ? <ReplyForm {...replyProps} /> : null}
 
       {replies.length > 0 ? (

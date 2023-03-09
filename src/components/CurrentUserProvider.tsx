@@ -7,7 +7,7 @@ type CurrentUserProviderProps = {
 };
 
 function CurrentUserProvider({ children }: CurrentUserProviderProps) {
-  const [currentUser, setCurrentUser] = useState(USERS_ARRAY[0]);
+  const [currentUser, setCurrentUser] = useState(USERS_ARRAY[Math.floor(Math.random() * 4)]);
 
   function changeUser(event: React.MouseEvent<HTMLButtonElement>): void {
     const index = Number((event.currentTarget as HTMLButtonElement).value);

@@ -19,9 +19,11 @@ function Info({ user, commentObj }: InfoProps) {
       </div>
       <address className="comment__username-container">
         <p className="comment__username">{commentObj.author.username}</p>
+
         {user.username === commentObj.author.username ? (
           <span className="comment__tag">you</span>
         ) : null}
+        
       </address>
       <time className="comment__date" dateTime="">
         {getTime(commentObj.date)}

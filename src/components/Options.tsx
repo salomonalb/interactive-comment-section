@@ -27,12 +27,14 @@ function Options({
           Delete
         </button>
       ) : null}
+
       {user.username !== commentObj.author.username ? (
         <button className="comment__reply" onClick={handleReply}>
           <img src={replyIcon} alt="reply" />
           Reply
         </button>
       ) : null}
+      
       {user.username === commentObj.author.username ? (
         <button className="comment__edit" onClick={handleEdit}>
           <img src={editIcon} alt="edit" />
