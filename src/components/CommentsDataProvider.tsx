@@ -1,4 +1,4 @@
-import { ReactNode, useReducer } from "react";
+import { ReactNode, useEffect, useReducer } from "react";
 import { globalData } from "../context/globalData";
 import { INITIAL_DATA } from "../constants/INITIAL_DATA";
 import { commentType } from "../types/commentType";
@@ -10,7 +10,16 @@ type CommentsDataProviderProps = {
 };
 
 function CommentsDataProvider({ children }: CommentsDataProviderProps) {
-  const [state, dispatch] = useReducer(reducer, INITIAL_DATA);
+
+  const localState = (localStorage.getItem('state'))
+
+  const parsedState: commentType[] = localState ? JSON.parse(localState) : INITIAL_DATA
+
+  const [state, dispatch] = useReducer(reducer, parsedState);
+
+  useEffect(()=> {
+    localStorage.setItem('state', JSON.stringify(state))
+  }, [state])
 
   function addComment(comment: commentType) {
     dispatch({ type: ACTION_TYPES.ADD_COMMENT, payload: comment });
