@@ -10,16 +10,17 @@ type CommentsDataProviderProps = {
 };
 
 function CommentsDataProvider({ children }: CommentsDataProviderProps) {
+  const localState = localStorage.getItem("state");
 
-  const localState = (localStorage.getItem('state'))
-
-  const parsedState: commentType[] = localState ? JSON.parse(localState) : INITIAL_DATA
+  const parsedState: commentType[] = localState
+    ? JSON.parse(localState)
+    : INITIAL_DATA;
 
   const [state, dispatch] = useReducer(reducer, parsedState);
 
-  useEffect(()=> {
-    localStorage.setItem('state', JSON.stringify(state))
-  }, [state])
+  useEffect(() => {
+    localStorage.setItem("state", JSON.stringify(state));
+  }, [state]);
 
   function addComment(comment: commentType) {
     dispatch({ type: ACTION_TYPES.ADD_COMMENT, payload: comment });
