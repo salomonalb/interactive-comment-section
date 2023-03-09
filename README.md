@@ -28,3 +28,7 @@ By passing data and functions to its subcomponents via props, the comment compon
 In order to highlight usernames in comments, the Text component splits the comment text and maps through each word, returning a JSX element if a word matches a regular expression beginning with @.
 
 To preserve the state of the application, I implemented the useEffect hook to save the state to localStorage every time it changes.
+
+
+
+The Design of the project is based on challenche present in (FrontendMentor)[https://www.frontendmentor.io]
