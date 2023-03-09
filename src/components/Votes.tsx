@@ -1,8 +1,8 @@
 import React from "react";
 import { commentType } from "../types/commentType";
 import { user } from "../types/userType";
-import plusIcon from "../assets/images/icon-plus.svg";
-import minusIcon from "../assets/images/icon-minus.svg";
+import plusIcon from "../images/icons/icon-plus.svg";
+import minusIcon from "../images/icons/icon-minus.svg";
 
 type VotesProps = {
   user: user;

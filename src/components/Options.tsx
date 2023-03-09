@@ -1,6 +1,6 @@
-import replyIcon from "../assets/images/icon-reply.svg";
-import deleteIcon from "../assets/images/icon-delete.svg";
-import editIcon from "../assets/images/icon-edit.svg";
+import replyIcon from "../images/icons/icon-reply.svg";
+import deleteIcon from "../images/icons/icon-delete.svg";
+import editIcon from "../images/icons/icon-edit.svg";
 import { user } from "../types/userType";
 import { commentType } from "../types/commentType";
 
