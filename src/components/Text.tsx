@@ -5,7 +5,6 @@ type TextProps = {
 };
 
 function Text({ commentObj }: TextProps) {
-
   const text = commentObj.commentText.split(" ").map((word) => {
     const regex = /^@[\w\d]+/g;
 
@@ -13,13 +12,9 @@ function Text({ commentObj }: TextProps) {
       return <span className="comment__text--highlight">{word} </span>;
     }
     return `${word} `;
-  })
+  });
 
-  return (
-    <p className="comment__text">
-      {text}
-    </p>
-  );
+  return <p className="comment__text">{text}</p>;
 }
 
 export default Text;

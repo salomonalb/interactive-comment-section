@@ -99,7 +99,6 @@ function CommentComp({ commentObj }: commentProps) {
   return (
     <>
       <article className="comment">
-
         <Votes
           user={user}
           commentObj={commentObj}
@@ -127,12 +126,12 @@ function CommentComp({ commentObj }: commentProps) {
       </article>
 
       {isDeleting ? (
-          <DeleteModal
-            setIsDeleting={setIsDeleting}
-            handleDeleteModal={handleDeleteModal}
-          />
-        ) : null}
-        
+        <DeleteModal
+          setIsDeleting={setIsDeleting}
+          handleDeleteModal={handleDeleteModal}
+        />
+      ) : null}
+
       {isReplying ? <ReplyForm {...replyProps} /> : null}
 
       {replies.length > 0 ? (

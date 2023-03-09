@@ -1,10 +1,4 @@
-import {
-  FormEvent,
-  useState,
-  useContext,
-  useEffect,
-  useRef,
-} from "react";
+import { FormEvent, useState, useContext, useEffect, useRef } from "react";
 import { globalData } from "../context/globalData";
 import { commentType } from "../types/commentType";
 

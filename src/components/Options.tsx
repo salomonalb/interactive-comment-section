@@ -34,7 +34,7 @@ function Options({
           Reply
         </button>
       ) : null}
-      
+
       {user.username === commentObj.author.username ? (
         <button className="comment__edit" onClick={handleEdit}>
           <img src={editIcon} alt="edit" />

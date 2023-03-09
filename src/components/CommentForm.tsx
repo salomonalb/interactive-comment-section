@@ -1,10 +1,4 @@
-import {
-  FormEvent,
-  useState,
-  useContext,
-  useRef,
-  useEffect,
-} from "react";
+import { FormEvent, useState, useContext, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { CurrentUser } from "../context/CurrentUser";
 import { globalData } from "../context/globalData";
