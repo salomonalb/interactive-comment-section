@@ -32,3 +32,8 @@ To preserve the state of the application, I implemented the useEffect hook to sa
 
 
 The Design of the project is based on challenche present in [FrontendMentor](https://www.frontendmentor.io)
+
+The Project is deployed with Netlify and Github. 
+
+https://interactive-comment-section-react-sl.netlify.app
+
