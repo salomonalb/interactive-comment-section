@@ -43,6 +43,10 @@ function CommentForm() {
     }
   }
 
+  useEffect(() => {
+    setComment("")
+  }, [user])
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <img className="form__avatar" src={user.avatar} alt={user.username} />
